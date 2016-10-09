@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjc.dao.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.xjc.model.Blog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="TIMESTAMP" />
+    <result column="review" property="review" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="reading" property="reading" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xjc.model.Blog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association column="type_id" property="blogType" select="com.xjc.dao.BlogTypeMapper.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, release_date, review, keyword, summary, reading, type_id,image
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xjc.model.Blog" >
+    insert into blog (id, title, release_date, 
+      review, keyword, summary, 
+      reading, type_id, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{review,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{reading,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjc.model.Blog" >
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="review != null" >
+        review,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="reading != null" >
+        reading,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review != null" >
+        #{review,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="reading != null" >
+        #{reading,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjc.model.Blog" >
+    update blog
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review != null" >
+        review = #{review,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="reading != null" >
+        reading = #{reading,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xjc.model.Blog" >
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      review = #{review,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      reading = #{reading,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjc.model.Blog" >
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      review = #{review,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      reading = #{reading,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询条件 -->
+  <sql id="WhereClause">
+  	<where>
+  		<if test="id!=null and id!=''">
+  			AND id = #{id}
+  		</if>
+  		<if test="title!=null and title!=''">
+  			AND title LIKE CONCAT('%',#{title},'%')
+  		</if>
+  		<if test="typeId!=null and typeId!=''">
+  			AND type_id = #{typeId}
+  		</if>
+  		<if test="firstDate!=null and firstDate!=''">
+  			AND release_date &gt;= #{firstDate}
+  		</if>
+  		<if test="secondDate!=null and secondDate!=''">
+  			AND release_date &lt;= #{secondDate}
+  		</if>
+  		<if test="releaseDate!=null and releaseDate!=''">
+  			AND DATE_FORMAT(release_date,'%Y年%m月') = #{releaseDate}
+  		</if>
+  	</where>
+  </sql>
+  
+  <!-- 查询所有博客并按时间降序排列 -->
+  <select id="getBlogList" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	<include refid="WhereClause"/>
+  	ORDER BY release_date DESC
+  	<if test="start!=null and size!=null">
+  		LIMIT #{start},#{size}
+  	</if>
+  </select>
+  
+  <!-- 获取上一篇博客 -->
+  <select id="getLastBlog" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	where id &lt; #{id}
+  	ORDER BY id DESC
+  	LIMIT 1
+  </select>
+  
+  <!-- 获取下一篇博客 -->
+  <select id="getNextBlog" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	where id &gt; #{id}
+  	ORDER BY id
+  	LIMIT 1
+  </select>
+  
+  <!-- 获取博客数 -->
+  <select id="getCount" parameterType="java.util.Map">
+  	SELECT COUNT(id) FROM blog
+  	<include refid="WhereClause"/>
+  </select>
+  
+  <!-- 根据类别查询博客 -->
+  <select id="getByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	WHERE type_id = #{typeId}
+  </select>
+  
+  <!-- 根据时间查询博客 -->
+  <select id="getByDate" resultMap="ResultMapWithBLOBs">
+  	SELECT DATE_FORMAT(release_date,'%Y年%m月') AS releaseDateStr,COUNT(id) AS count FROM blog
+  	GROUP BY DATE_FORMAT(release_date,'%Y年%m月')
+  	ORDER BY DATE_FORMAT(release_date,'%Y年%m月') DESC
+  </select>
+  
+  <!-- 查询前5条评论数高的博客 -->
+   <select id="getTopReview" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	ORDER BY review DESC
+  	LIMIT 5
+  </select>
+  
+   <!-- 查询前5条阅读量高的博客 -->
+   <select id="getTopReading" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blog
+  	ORDER BY reading DESC
+  	LIMIT 5
+  </select>
+</mapper>
