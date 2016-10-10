@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import com.xjc.model.Comment;
 import com.xjc.model.PageBean;
 import com.xjc.service.CommentService;
 import com.xjc.util.PageUtils;
+import com.xjc.util.ResponseUtils;
 
 @Controller
 @RequestMapping("/comment")
@@ -77,9 +80,15 @@ public class CommentAdminController {
 	
 	//评论审核
 	@RequestMapping("/review")
-	public String review(Comment comment) {
-		commentService.review(comment);
-		return "redirect:/comment/list.do";
+	public String review(Comment comment,HttpServletResponse response) {
+		int result = commentService.review(comment);
+		JSONObject jsonObj = new JSONObject();
+		if(result > 0)
+			jsonObj.put("success", true);
+		else
+			jsonObj.put("success", false);
+		ResponseUtils.writeJson(response, jsonObj.toString());
+		return null;
 	}
 	
 	@RequestMapping("/delete")
