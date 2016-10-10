@@ -43,31 +43,31 @@
 	</div>
 
 	<div class="loginbody">
-
 		<span class="systemlogo2"></span>
-
 		<div class="loginbox loginbox1">
-
 			<ul>
-				<li><input name="" type="text" class="loginuser" value="admin"
-					onclick="JavaScript:this.value=''" /></li>
-				<li><input name="" type="text" class="loginpwd" value="密码"
-					onclick="JavaScript:this.value=''" /></li>
-				<li class="yzm"><span><input name="" type="text"
-						value="验证码" onclick="JavaScript:this.value=''" /></span><cite>X3D5S</cite>
+				<li><input id="username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''" /></li>
+				<li><input id="password" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''" /></li>
+				<li>
+					<input type="button" class="loginbtn" value="登录" onclick="login()"/>
+					<label><input name="" type="checkbox" value="" checked="checked" />记住密码</label>
+					<label><a href="#">忘记密码？</a></label>
 				</li>
-				<li><input name="" type="button" class="loginbtn" value="登录"
-					onclick="javascript:window.location='admin/userLogin.do'" /><label><input
-						name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a
-						href="#">忘记密码？</a></label></li>
 			</ul>
 		</div>
-
 	</div>
-
-
-	<div class="loginbm">
-		<div>
+<script type="text/javascript">
+	function login(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		$.post("admin/userLogin.do",{"username":username,"password":password},function(result){
+			if(result){
+				alert(result);
+				return;
+			}
+			window.location.href="admin/index.do";
+		});
+	}
+</script>
 </body>
-
 </html>

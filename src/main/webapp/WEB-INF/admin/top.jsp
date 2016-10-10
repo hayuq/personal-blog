@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +8,7 @@
 </head>
 <body style="background:url(static/images/admin/topbg.gif) repeat-x;">
 	<div class="topleft">
-    <a href="main.html" target="_parent"><img src="static/images/admin/logo2.png" title="系统首页" /></a>
+    	<a href="main.html" target="_parent"><img src="static/images/admin/logo2.png" title="系统首页" /></a>
     </div>
         
    <!--  <ul class="nav">
@@ -23,18 +23,17 @@
     </ul> -->
             
     <div class="topright">    
-    <ul>
-    <li><span><img src="static/images/admin/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
-    <li><a href="#">关于</a></li>
-    <li><a href="admin/login.do" target="_parent">退出</a></li>
-    </ul>
-     
-    <div class="user">
-    <span>admin</span>
-    <i>消息</i>
-    <b>5</b>
-    </div>    
-    
+	    <ul>
+		    <li><span><img src="static/images/admin/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
+		    <li><a href="#">关于</a></li>
+		    <li><a href="javascript:void(0)" onclick="window.location.href='admin/login.do'">退出</a></li>
+	    </ul>
+	     
+	    <div class="user">
+		   <span> 欢迎您：${user }</span>
+		    <!-- <i>消息</i>
+		    <b>5</b> -->
+	    </div>
     </div>
 </body>
 </html>

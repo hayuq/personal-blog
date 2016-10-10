@@ -120,13 +120,13 @@
 			<ul class="menuson">
 				<li>
 					<div class="header">
-						<cite></cite> <i></i> <a href="blogger/modifyPassword.do"
+						<cite></cite> <i></i> <a href="blogger/toModifyPassword.do"
 							target="rightFrame">修改密码</a>
 					</div>
 				</li>
 				<li>
 					<div class="header">
-						<cite></cite> <i></i> <a href="blogger/modifyInfo.do"
+						<cite></cite> <i></i> <a href="blogger/toModifyInfo.do"
 							target="rightFrame">修改个人信息</a>
 					</div>
 				</li>

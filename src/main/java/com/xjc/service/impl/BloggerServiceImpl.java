@@ -22,4 +22,8 @@ public class BloggerServiceImpl implements BloggerService {
 		return bloggerMapper.findByName(name);
 	}
 
+	public int update(Blogger blogger) {
+		return bloggerMapper.updateByPrimaryKeySelective(blogger);
+	}
+
 }

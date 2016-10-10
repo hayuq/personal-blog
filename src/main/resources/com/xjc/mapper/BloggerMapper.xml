@@ -33,10 +33,10 @@
   <insert id="insert" parameterType="com.xjc.model.Blogger" >
     insert into blogger (id, nick_name, signature, 
       image_url, user_name, password, 
-      resume)
+      profile)
     values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
       #{imageUrl,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{resume,jdbcType=LONGVARCHAR})
+      #{profile,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xjc.model.Blogger" >
     insert into blogger
@@ -59,8 +59,8 @@
       <if test="password != null" >
         password,
       </if>
-      <if test="resume != null" >
-        resume,
+      <if test="profile != null" >
+        profile,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -82,8 +82,8 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="resume != null" >
-        #{resume,jdbcType=LONGVARCHAR},
+      <if test="profile != null" >
+        #{profile,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -105,8 +105,8 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="resume != null" >
-        resume = #{resume,jdbcType=LONGVARCHAR},
+      <if test="profile != null" >
+        profile = #{profile,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -118,7 +118,7 @@
       image_url = #{imageUrl,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      resume = #{resume,jdbcType=LONGVARCHAR}
+      profile = #{profile,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjc.model.Blogger" >
@@ -127,7 +127,12 @@
       signature = #{signature,jdbcType=VARCHAR},
       image_url = #{imageUrl,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR}
+      password = #{password,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blogger where user_name = #{name}
+  </select>
 </mapper>

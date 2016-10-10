@@ -85,10 +85,10 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td style="width:50px">显示图片</td>
 					<td><input type="file" id="image"/></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td style="width:50px">博客内容</td>
 					<td>
