@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.opensymphony.oscache.util.StringUtil;
 import com.xjc.model.Blog;
@@ -86,7 +88,11 @@ public class BlogAdminController {
 	}
 	
 	@RequestMapping("/add")
-	public String add(Blog blog,HttpServletResponse response) {
+	public String add(Blog blog,@RequestParam(value="img",required=false)MultipartFile file,
+			HttpServletResponse response) {
+			
+		//TODO 图片文件上传功能
+		System.out.println("原始路径：================="+file.getOriginalFilename());
 		int result = blogService.add(blog);
 		JSONObject jsonObj = new JSONObject();
 		if(result > 0)

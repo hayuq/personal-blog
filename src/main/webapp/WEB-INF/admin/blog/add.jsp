@@ -9,9 +9,6 @@
 	.scbtn { float: left; margin-top: 20px; margin-left: 10px;}
 </style>
 <!-- ueditor -->
-<script>
- // var UEDITOR_HOME_URL = "/Blog/static/ueditor/"; //从项目的根目录开始
-</script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -24,8 +21,8 @@
 	});
 		
 	//发布博客
-	function saveBlog(){
-		var title = $("#title").val();
+	function checkData(){
+		/* var title = $("#title").val();
 		var type = $("#type").val();
 		var keyword = $("#keyword").val();
 		var content = editor.getContent();
@@ -42,6 +39,8 @@
 			alert("博客内容不允许为空");
 			return;
 		}
+		$("#addForm").serialize();
+		$("#addForm").submit();
 		
 		var params = {"title":title,"content":content,"typeId":type,"summary":summary,"keyword":keyword};
 		
@@ -55,7 +54,24 @@
 			} else {
 				alert("失败");
 			}
-		}, "json");
+		}, "json"); */
+	}
+	
+	//图片预览
+	function previewImg(file) {
+		var prevImg = document.getElementById('preview');
+		if (file.files && file.files[0]) {
+			//创建FileReader对象
+			var reader = new FileReader();
+			reader.onload = function(evt) {
+				prevImg.src = evt.target.result;
+			}
+			// 读取File对象的数据
+			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
+			reader.readAsDataURL(file.files[0]);
+		} else {
+			prevImg.src = file.value;
+		}
 	}
 </script>
 </head>
@@ -69,6 +85,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
+		<form action="blog/add.do" method="post" id="addForm" onsubmit="checkData()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">博客标题</td>
@@ -85,10 +102,11 @@
 						</select>
 					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="image"/></td>
-				</tr> -->
+					<td><input type="file" name="img" onchange="previewImg(this)"/>
+					<img id="preview" width="100px" height="100px"/></td>
+				</tr>
 				<tr>
 					<td style="width:50px">博客内容</td>
 					<td>
@@ -111,8 +129,9 @@
 		   			<td><input type="text" id="keyword" name="keyword" class="scinput" style="width:300px"/>&nbsp;(多个关键字中间用空格隔开)</td>
 		   		</tr>
 			</table>
-			<input name="" type="button" class="scbtn" value="发布博客" onclick="saveBlog()"/>
+			<input name="" type="submit" class="scbtn" value="发布博客"/>
 			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
+		</form>
 	</div>
 </body>
 </html>

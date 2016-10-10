@@ -78,17 +78,17 @@
 					<td style="width:50px">所属类别</td>
 					<td>
 						<select class="select" id="type" name="type">
-							<option value="">--请选择--</option>
 							<c:forEach var="blogType" items="${blogTypeList }">
 								<option value="${blogType.typeId }" <c:if test="${blog.typeId == blogType.typeId }">selected="seleted"</c:if>>${blogType.typeName }</option>
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="image"/></td>
-				</tr> -->
+					<td><input type="file" id="image" onchange="alert(this.value)"/>
+					<img id="avatar" src="static/uploadFiles/${blog.image }" alt="图片" width="100px" height="100px"/></td>
+				</tr>
 				<tr>
 					<td style="width:50px">博客内容</td>
 					<td>
