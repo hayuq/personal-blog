@@ -90,12 +90,6 @@
 							target="rightFrame">评论列表</a>
 					</div>
 				</li>
-				<li>
-					<div class="header">
-						<cite></cite> <i></i> <a href="comment/detail.do"
-							target="rightFrame">评论审核</a>
-					</div>
-				</li>
 			</ul>
 		</dd>
 		
