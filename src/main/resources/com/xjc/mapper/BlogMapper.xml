@@ -73,6 +73,9 @@
       <if test="content != null" >
         content,
       </if>
+      <if test="image != null" >
+        image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -101,6 +104,9 @@
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>

@@ -47,7 +47,7 @@
 							<td>${blogType.orderNo }</td>
 							<td>
 								<a href="blogType/toUpdate.do?id=${blogType.typeId }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
-								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='blogType/delete.do?id=${blogType.typeId }'"> <img src="static/images/admin/t03.png" />删除</a>
+								<a href="javascript:void(0)" class="tablelink" onclick="deleteBlogType('${blogType.typeId}')"> <img src="static/images/admin/t03.png" />删除</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -55,7 +55,7 @@
 			</tbody>
 		</table>
 		
-		<div class="pagin">
+		<%-- <div class="pagin">
 			<div class="message">
 				 <input name="" type="button" class="scbtn" value="删除所选" onclick="deleteSelected('chk','blogType/deletes.do')" />
 				共<i class="blue">&nbsp;${pagination.totalCount }&nbsp;</i>条记录，每页&nbsp;<i
@@ -63,7 +63,20 @@
 					class="blue">${pagination.currentPage }&nbsp;/&nbsp;${pagination.totalPage }&nbsp;</i>页
 			</div>
 			<ul class="paginList"> ${pageCode } </ul>
-		</div>
+		</div> --%>
 	</div>
+<script type="text/javascript">
+	function deleteBlogType(id){
+		//查询该类别下是否存在文章
+		$.post("blogType/search.do",{"id":id},function(result){
+			if(result.count == 0 && confirm('确定删除该类别吗？')) {			
+				window.location.href='blogType/delete.do?id='+id;
+			}
+			else if(result.count > 0 && confirm('该类别下有'+result+'篇文章，删除将会把文章移出此分类，是否继续？')){
+				window.location.href='blogType/update.do?id='+id;
+			}
+		},"json");
+	}
+</script>
 </body>
 </html>

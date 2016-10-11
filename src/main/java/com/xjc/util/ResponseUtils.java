@@ -11,8 +11,8 @@ public class ResponseUtils {
 		write(response, text);
 	}
 
-	public static void writeText(HttpServletResponse response,String text){
-		response.setContentType("text/plain;charset=UTF-8");
+	public static void writeHtml(HttpServletResponse response,String text){
+		response.setContentType("text/html;charset=UTF-8");
 		write(response, text);
 	}
 	
@@ -22,6 +22,12 @@ public class ResponseUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void writeText(HttpServletResponse response, String text) {
+		response.setContentType("text/plain;charset=UTF-8");
+		write(response, text);
+		
 	}
 	
 }

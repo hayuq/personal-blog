@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/WEB-INF/admin/head.jsp" %>
 <title>博客后台管理系统</title>
+<%
+	if(session.getAttribute("user") == null){
+		response.sendRedirect("login.do");
+	}
+%>
 </head>
 <!-- 后台页面主框架 -->
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">

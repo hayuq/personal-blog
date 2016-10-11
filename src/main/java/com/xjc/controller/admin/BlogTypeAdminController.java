@@ -5,17 +5,23 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.naming.directory.SearchControls;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.opensymphony.oscache.util.StringUtil;
 import com.xjc.model.BlogType;
 import com.xjc.model.PageBean;
+import com.xjc.service.BlogService;
 import com.xjc.service.BlogTypeService;
 import com.xjc.util.PageUtils;
+import com.xjc.util.ResponseUtils;
 
 /**
  * 博客类别Controller
@@ -26,6 +32,9 @@ public class BlogTypeAdminController {
 
 	@Resource
 	BlogTypeService blogTypeService;
+	
+	@Resource
+	BlogService blogService;
 
 	@RequestMapping("/list")
 	public String list(String page, Model model, HttpServletRequest request) {
@@ -71,19 +80,27 @@ public class BlogTypeAdminController {
 		blogTypeService.update(blogType);
 		return "redirect:/blogType/list.do";
 	}
+	
+	@RequestMapping("/search")
+	public String search(Integer id,HttpServletResponse response){
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("count", blogService.getByTypeId(id).size());
+		ResponseUtils.writeJson(response, jsonObj.toString());
+		return null;
+	}
 
+	//只删除类别
 	@RequestMapping("/delete")
 	public String delete(Integer id) {
 		blogTypeService.delete(id);
 		return "redirect:/blogType/list.do";
 	}
 
+	//删除的同时将相关博客的类别置空
 	@RequestMapping("/deletes")
-	public String deletes(String ids) {
-		String[] commentIds = ids.split(",");
-		for (String id : commentIds) {
-			blogTypeService.delete(Integer.parseInt(id));
-		}
+	public String deletes(Integer id) {
+		
+		//TODO 删除的同时将相关博客的类别置空
 		return "redirect:/blogType/list.do";
 	}
 }

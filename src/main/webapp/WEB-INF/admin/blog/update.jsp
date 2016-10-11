@@ -57,6 +57,23 @@
 			}
 		}, "json");
 	}
+	
+	//图片上传前预览
+	function previewImg(file) {
+		var prevImg = document.getElementById('preview');
+		if (file.files && file.files[0]) {
+			//创建FileReader对象
+			var reader = new FileReader();
+			reader.onload = function(evt) {
+				prevImg.src = evt.target.result;
+			}
+			// 读取File对象的数据
+			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
+			reader.readAsDataURL(file.files[0]);
+		} else {
+			prevImg.src = file.value;
+		}
+	}
 </script>
 </head>
 <body>
@@ -65,19 +82,20 @@
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
 			<li><a href="blog/list.do">博客管理</a></li>
-			<li>写博客</li>
+			<li>修改博客</li>
 		</ul>
 	</div>
 	<div class="rightinfo">
+		<form action="blog/update.do" method="post" onsubmit="return checkData()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
-					<td style="width:50px">博客标题<input type="hidden" id="id" value="${blog.id}"/></td>
-					<td><input id="title" type="text" class="scinput" style="width:300px" value="${blog.title }"/></td>
+					<td style="width:50px">博客标题<input type="hidden" id="id" name="id" value="${blog.id}"/></td>
+					<td><input id="title" name="title" type="text" class="scinput" style="width:300px" value="${blog.title }"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">所属类别</td>
 					<td>
-						<select class="select" id="type" name="type">
+						<select class="select" id="type" name="typeId">
 							<c:forEach var="blogType" items="${blogTypeList }">
 								<option value="${blogType.typeId }" <c:if test="${blog.typeId == blogType.typeId }">selected="seleted"</c:if>>${blogType.typeName }</option>
 							</c:forEach>
@@ -86,13 +104,13 @@
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="image" onchange="alert(this.value)"/>
-					<img id="avatar" src="static/uploadFiles/${blog.image }" alt="图片" width="100px" height="100px"/></td>
+					<td><input type="file" id="image" name="image" onchange="alert(this.value)"/>
+					<img id="preview" src="static/uploadFiles/${blog.image }" alt="图片" width="100px" height="100px"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">博客内容</td>
 					<td>
-						<textarea id="editor">${blog.content }</textarea>
+						<textarea id="editor" name="content">${blog.content }</textarea>
 							<script type="text/javascript">
 								//实例化编辑器
 								var editor = UE.getEditor('editor',{
@@ -103,10 +121,6 @@
 							        scaleEnabled: false, //是否可以拉伸长高,默认true
 							        allowDivTransToP: false
 								});
-								/* var content = "${blog.content}";
-								ue.ready(function() {
-								    ue.setContent(content);
-								}); */
 							</script>
 					</td>
 				</tr>
@@ -115,8 +129,9 @@
 		   			<td><input type="text" id="keyword" name="keyword" value="${blog.keyword }" class="scinput" style="width:300px"/>&nbsp;(多个关键字中间用空格隔开)</td>
 		   		</tr>
 			</table>
-			<input name="" type="button" class="scbtn" value="发布博客" onclick="updateBlog()"/>
+			<input name="" type="submit" class="scbtn" value="发布博客"/>
 			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
+		</form>
 	</div>
 </body>
 </html>

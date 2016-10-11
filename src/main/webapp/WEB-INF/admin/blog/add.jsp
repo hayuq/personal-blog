@@ -20,9 +20,9 @@
 		});
 	});
 		
-	//发布博客
 	function checkData(){
-		/* var title = $("#title").val();
+		var img = $("#img").val();
+		var title = $("#title").val();
 		var type = $("#type").val();
 		var keyword = $("#keyword").val();
 		var content = editor.getContent();
@@ -39,25 +39,9 @@
 			alert("博客内容不允许为空");
 			return;
 		}
-		$("#addForm").serialize();
-		$("#addForm").submit();
-		
-		var params = {"title":title,"content":content,"typeId":type,"summary":summary,"keyword":keyword};
-		
-		$.post("blog/add.do", params, function(result) {
-			if (result.success) {
-				alert("博客发布成功！");
-				$("#title").val('');
-				$("#type").val('');
-				$("#keyword").val('');
-				editor.setContent('');
-			} else {
-				alert("失败");
-			}
-		}, "json"); */
 	}
 	
-	//图片预览
+	//图片上传前预览
 	function previewImg(file) {
 		var prevImg = document.getElementById('preview');
 		if (file.files && file.files[0]) {
@@ -85,16 +69,16 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blog/add.do" method="post" id="addForm" onsubmit="checkData()" enctype="multipart/form-data">
+		<form action="blog/add.do" method="post" id="addForm" name="addForm" onsubmit="return checkData()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">博客标题</td>
-					<td><input id="title" type="text" class="scinput" style="width:300px"/></td>
+					<td><input id="title" name="title" type="text" class="scinput" style="width:300px"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">所属类别</td>
 					<td>
-						<select class="select" id="type" name="type">
+						<select class="select" id="type" name="typeId">
 							<option value='0'>--请选择--</option>
 								<c:forEach var="blogType" items="${blogTypeList }">
 									<option value="${blogType.typeId }">${blogType.typeName }</option>
@@ -104,13 +88,13 @@
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" name="img" onchange="previewImg(this)"/>
+					<td><input type="file" name="img" id="img" onchange="previewImg(this)"/>
 					<img id="preview" width="100px" height="100px"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">博客内容</td>
 					<td>
-						<textarea id="editor"></textarea>
+						<textarea id="editor" name="content"></textarea>
 							<script type="text/javascript">
 								//实例化编辑器
 								var editor = UE.getEditor('editor',{
@@ -129,7 +113,7 @@
 		   			<td><input type="text" id="keyword" name="keyword" class="scinput" style="width:300px"/>&nbsp;(多个关键字中间用空格隔开)</td>
 		   		</tr>
 			</table>
-			<input name="" type="submit" class="scbtn" value="发布博客"/>
+			<input name="" type="submit" class="scbtn" value="发布博客" onclick="submitData()"/>
 			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
 		</form>
 	</div>

@@ -47,7 +47,7 @@
 		<div class="loginbox loginbox1">
 			<ul>
 				<li><input id="username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''" /></li>
-				<li><input id="password" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''" /></li>
+				<li><input id="password" type="password" class="loginpwd" value="密码" onclick="JavaScript:this.value=''" /></li>
 				<li>
 					<input type="button" class="loginbtn" value="登录" onclick="login()"/>
 					<label><input name="" type="checkbox" value="" checked="checked" />记住密码</label>
