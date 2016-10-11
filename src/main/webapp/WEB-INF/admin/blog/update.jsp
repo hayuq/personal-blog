@@ -22,8 +22,7 @@
 		});
 	});
 	
-	//发布博客
-	function updateBlog(){
+	function checkData(){
 		var id = $("#id").val();
 		var title = $("#title").val();
 		var type = $("#type").val();
@@ -43,7 +42,7 @@
 			return;
 		}
 		
-		var params = {"id":id,"title":title,"content":content,"typeId":type,"summary":summary,"keyword":keyword};
+		/* var params = {"id":id,"title":title,"content":content,"typeId":type,"summary":summary,"keyword":keyword};
 		
 		$.post("blog/update.do", params, function(result) {
 			if (result.success) {
@@ -55,7 +54,7 @@
 			} else {
 				alert("更新失败");
 			}
-		}, "json");
+		}, "json"); */
 	}
 	
 	//图片上传前预览
@@ -104,7 +103,7 @@
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="image" name="image" onchange="alert(this.value)"/>
+					<td><input type="file" id="image" value="static/uploadFiles/${blog.image }" name="image" onchange="previewImg(this)"/>
 					<img id="preview" src="static/uploadFiles/${blog.image }" alt="图片" width="100px" height="100px"/></td>
 				</tr>
 				<tr>
@@ -129,8 +128,8 @@
 		   			<td><input type="text" id="keyword" name="keyword" value="${blog.keyword }" class="scinput" style="width:300px"/>&nbsp;(多个关键字中间用空格隔开)</td>
 		   		</tr>
 			</table>
-			<input name="" type="submit" class="scbtn" value="发布博客"/>
-			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
+			<input type="submit" class="scbtn" value="发布博客"/>
+			<input type="button" class="scbtn" value="返回" onclick="history.back()" />
 		</form>
 	</div>
 </body>

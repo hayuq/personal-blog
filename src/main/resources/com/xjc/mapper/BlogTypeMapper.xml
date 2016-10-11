@@ -71,13 +71,15 @@
   
   <!-- 获取博客类别 -->
   <select id="getAllTypeList" resultMap="BaseResultMap">
-  	SELECT * FROM blog_type
+  	SELECT * FROM blog_type 
+  	WHERE type_id != 1
 	ORDER BY type_id
   </select>
   
   <!-- 获取博客类别 -->
   <select id="getTypeList" parameterType="java.util.Map" resultMap="BaseResultMap">
-  	SELECT * FROM blog_type
+  	SELECT * FROM blog_type 
+  	WHERE type_id != 1
 	ORDER BY type_id
 	<if test="start!=null and size!=null">
 		LIMIT #{start},#{size}

@@ -1,6 +1,7 @@
 package com.xjc.controller.admin;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -39,17 +40,22 @@ public class BloggerAdminController {
 	}
 	
 	@RequestMapping("/modifyPassword")
-	public String modifyPassword(String pwd,Integer id,HttpServletResponse response) {
+	public String modifyPassword(String newpwd,String oldpwd,String repwd,
+			HttpServletResponse response,HttpServletRequest request) {
 		
-		JSONObject jsonObj = new JSONObject();
-		Blogger blogger = bloggerService.findById(id);
-		blogger.setPassword(MD5EncodeUtils.encrypt(pwd, "xjc"));
-		int result = bloggerService.update(blogger);
-		if(result > 0)
-			jsonObj.put("success", true);
-		else
-			jsonObj.put("success", false);
-		ResponseUtils.writeJson(response, jsonObj.toString());
+		Blogger blogger = bloggerService.findById(1);
+		System.out.println(blogger);
+		if(!blogger.getPassword().equals(MD5EncodeUtils.encrypt(oldpwd, "xjc"))){
+			ResponseUtils.writeText(response, "原密码输入不正确");
+			return null;
+		}
+		if(!newpwd.equals(repwd)){
+			ResponseUtils.writeText(response, "两次密码输入不一致");
+			return null;
+		}
+		blogger.setPassword(MD5EncodeUtils.encrypt(newpwd, "xjc"));
+		bloggerService.update(blogger);
+		ResponseUtils.writeText(response,"修改成功");
 		return null;
 	}
 }

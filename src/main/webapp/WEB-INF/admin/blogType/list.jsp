@@ -72,8 +72,8 @@
 			if(result.count == 0 && confirm('确定删除该类别吗？')) {			
 				window.location.href='blogType/delete.do?id='+id;
 			}
-			else if(result.count > 0 && confirm('该类别下有'+result+'篇文章，删除将会把文章移出此分类，是否继续？')){
-				window.location.href='blogType/update.do?id='+id;
+			else if(result.count > 0 && confirm('该类别下有'+result.count+'篇文章，删除将会把文章移出此分类，是否继续？')){
+				window.location.href='blogType/batch_delete.do?id='+id;
 			}
 		},"json");
 	}

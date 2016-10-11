@@ -93,7 +93,7 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping("/add")
-	public String add(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
+	public void add(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
 			HttpServletResponse response, HttpServletRequest request) {
 
 		// 获取原始文件名
@@ -118,11 +118,10 @@ public class BlogAdminController {
 		else{
 			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
 		}
-		return "blog/toAdd.do";
 	}
 
 	@RequestMapping("/update")
-	public String update(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
+	public void update(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
 			HttpServletResponse response, HttpServletRequest request) {
 
 		// 获取原始文件名
@@ -147,7 +146,6 @@ public class BlogAdminController {
 		else{
 			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
 		}
-		return "blog/toUpdate.do";
 	}
 
 	@RequestMapping("/delete")

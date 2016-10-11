@@ -5,7 +5,7 @@
 <%@include file="/WEB-INF/admin/head.jsp" %>
 <title>博客后台管理系统</title>
 <%
-	if(session.getAttribute("user") == null){
+	if(session.getAttribute("currentUser") == null){
 		response.sendRedirect("login.do");
 	}
 %>

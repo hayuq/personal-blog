@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -17,25 +17,44 @@
 	</div>
 	
 	<div class="rightinfo">
+		<form action="blogger/modifyPassword.do" method="post">
 			<table class="table">
 				<tr>
-					<td style="width:50px">原密码<input type="hidden" id="id" value="${blogger.id }"/></td>
-					<td>${blogger.password }</td>
+					<td style="width:50px">原密码<input type="hidden" name="id" id="id" value="${currentUser.id }"/></td>
+					<td>
+						<input type="text" name="oldpwd" id="oldpwd" class="scinput" required="required"/>
+					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">新密码</td>
-					<td><input type="text" id="pwd" class="scinput"/></td>
+					<td><input type="text" name="newpwd" id="newpwd" class="scinput" required="required"/></td>
+				</tr>
+				<tr>
+					<td style="width:60px">确认新密码</td>
+					<td><input type="text" name="repwd" id="repwd" class="scinput" required="required"/></td>
 				</tr>
 			</table>
 			<input type="button" class="scbtn" value="保存" onclick="savePwd()"/>
+			<span id="errorInfo" style="font-size:16px"></span>
+		</form>
 	</div>
 <script type="text/javascript">
 	function savePwd(){
-		$.post("blogger/modifyPassword.do",{"id":$("#id").val(),"pwd":$("#pwd").val()},function(result){
-			if(result.success)
-				alert("修改成功");
-			else
-				alert("修改失败");
+		var params = {
+			"id":$("#id").val(),
+			"newpwd":$("#newpwd").val(),
+			"oldpwd":$("#oldpwd").val(),
+			"repwd":$("#repwd").val()
+		};
+		$.post("blogger/modifyPassword.do",params,function(result){
+			if(result == '修改成功'){
+				$("#errorInfo").css("color","black");
+				$("#errorInfo").html("修改成功,下次登录时生效");
+			}
+			else{				
+				$("#errorInfo").css("color","red");
+				$("#errorInfo").html(result);
+			}
 		});
 	}
 </script>

@@ -1,14 +1,9 @@
 package com.xjc.controller.admin;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
-import java.io.PrintWriter;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +27,12 @@ public class SystemController {
 		return page;
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request){
+		request.getSession(false).invalidate();
+		return "login";
+	}
+	
 	//登录
 	@RequestMapping("/userLogin")
 	public String login(String username,String password,String vCode,Model model,
@@ -43,7 +44,7 @@ public class SystemController {
 			ResponseUtils.writeText(response, "用户名或密码错误");
 			return null;
 		}
-		request.getSession().setAttribute("user", username);
+		request.getSession().setAttribute("currentUser", blogger);
 		return null;
 	}
 	

@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.opensymphony.oscache.util.StringUtil;
+import com.xjc.model.Blog;
 import com.xjc.model.BlogType;
 import com.xjc.model.PageBean;
 import com.xjc.service.BlogService;
@@ -97,10 +98,16 @@ public class BlogTypeAdminController {
 	}
 
 	//删除的同时将相关博客的类别置空
-	@RequestMapping("/deletes")
-	public String deletes(Integer id) {
+	@RequestMapping("/batch_delete")
+	public String batchDelete(Integer id) {
 		
-		//TODO 删除的同时将相关博客的类别置空
+		//TODO 删除的同时将相关博客的类别置空，目前还存在问题，待解决
+		List<Blog> blogs = blogService.getByTypeId(id);
+		for(Blog blog : blogs){
+			blog.setTypeId(0);
+			blogService.update(blog);
+		}
+		blogTypeService.delete(id);
 		return "redirect:/blogType/list.do";
 	}
 }
