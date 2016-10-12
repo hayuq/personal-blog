@@ -31,6 +31,6 @@ public class MD5EncodeUtils {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(encrypt("123","xjc"));
+		System.out.println(encrypt("admin","xjc"));
 	}
 }

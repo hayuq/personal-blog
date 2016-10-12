@@ -93,19 +93,20 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping("/add")
-	public void add(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
-			HttpServletResponse response, HttpServletRequest request) {
+	public String add(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
+			HttpServletResponse response) {
 
 		// 获取原始文件名
 		String fileName = file.getOriginalFilename();
 		int index = fileName.indexOf(".");
-		//生成新文件名
-		String imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
+		String imageUrl = null;
+		if(index != -1){
+			//生成新文件名
+			imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
 				+ fileName.substring(index);
-
-		handleFileUpload(file, request, imageUrl);
-
-		blog.setImage(imageUrl);
+			handleFileUpload(file, imageUrl);
+			blog.setImage(imageUrl);
+		}
 		String content = blog.getContent();
 		if (content.length() > 300)
 			blog.setSummary(content.substring(0, 300));
@@ -114,26 +115,29 @@ public class BlogAdminController {
 		int result = blogService.add(blog);
 		if (result > 0){			
 			ResponseUtils.writeHtml(response, "<script>alert('保存成功')</script>");
+			return "redirect:/blog/list.do";
 		}
 		else{
 			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
+			return "redirect:/blog/add.do";
 		}
 	}
 
 	@RequestMapping("/update")
-	public void update(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
-			HttpServletResponse response, HttpServletRequest request) {
+	public String update(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
+			HttpServletResponse response) {
 
 		// 获取原始文件名
 		String fileName = file.getOriginalFilename();
 		int index = fileName.indexOf(".");
-		//生成新文件名
-		String imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
+		String imageUrl = null;
+		if(index != -1){
+			//生成新文件名
+			imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
 				+ fileName.substring(index);
-
-		handleFileUpload(file, request, imageUrl);
-
-		blog.setImage(imageUrl);
+			handleFileUpload(file,imageUrl);
+			blog.setImage(imageUrl);
+		}
 		String content = blog.getContent();
 		if (content.length() > 300)
 			blog.setSummary(content.substring(0, 300));
@@ -142,9 +146,11 @@ public class BlogAdminController {
 		int result = blogService.update(blog);
 		if (result > 0){			
 			ResponseUtils.writeHtml(response, "<script>alert('保存成功')</script>");
+			return "redirect:/blog/list.do";
 		}
 		else{
 			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
+			return "redirect:/blog/toUpdate.do?id="+blog.getId();
 		}
 	}
 
@@ -163,12 +169,12 @@ public class BlogAdminController {
 		return "redirect:/blog/list.do";
 	}
 	
-	private void handleFileUpload(MultipartFile file, HttpServletRequest request, String imageUrl) {
+	private void handleFileUpload(MultipartFile file,String imageUrl) {
 		InputStream is;
 		try {
 			// 获取输入流
 			is = file.getInputStream();
-			String filePath = request.getServletContext().getRealPath("static/uploadFiles/") + imageUrl;
+			String filePath = "C:/uploadFiles/cover/" + imageUrl;
 			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 			//判断上传目录是否存在
 			if (!dir.exists()) {

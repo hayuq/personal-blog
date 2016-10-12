@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -51,8 +51,8 @@
 </script>
 <div class="row banner">
 	<div class="col-md-4" style="float:left">
-		<h3>Promising的博客</h3>
-		<p>不想当老板的程序员不是好老师</p>
+		<h3>${blogger.nickName }的博客</h3>
+		<p>${blogger.signature }</p>
 	</div>
 	<div class="col-md-8" style="padding-top:20px;float: right;">
 		<iframe style="float: right;" width="300" scrolling="no" height="60"

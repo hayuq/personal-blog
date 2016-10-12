@@ -39,9 +39,13 @@ public class SystemController {
 			HttpServletRequest request,HttpServletResponse response){
 
 		Blogger blogger = bloggerService.findByName(username);
+		if(blogger == null){
+			ResponseUtils.writeText(response, "用户名不存在");
+			return null;
+		}
 		boolean flag = blogger.getPassword().equals(MD5EncodeUtils.encrypt(password, "xjc"));
-		if(blogger == null || !flag){
-			ResponseUtils.writeText(response, "用户名或密码错误");
+		if(!flag){
+			ResponseUtils.writeText(response, "密码错误");
 			return null;
 		}
 		request.getSession().setAttribute("currentUser", blogger);

@@ -132,7 +132,7 @@
 				</li>
 			</ul>
 		</dd>
-		<dd>
+		<!-- <dd>
 			<div class="title">
 				<span><img src="static/images/admin/leftico01.png" /></span>博客配置</a>
 			</div>
@@ -144,7 +144,7 @@
 					</div>
 				</li>
 			</ul>
-		</dd>
+		</dd> -->
 	</dl>
 </body>
 </html>

@@ -54,7 +54,7 @@
 							<td><input name="chk" type="checkbox" value="${blog.id }" /></td>
 							<td>${index.count }</td>
 							<td><a target="_blank" class="tablelink" href="blog/article/${blog.id }.shtml">${blog.title }</a></td>
-							<td><a target="_blank" class="tablelink" href="index.shtml/type=${blog.blogType.typeId }">${blog.blogType.typeName }</a></td>
+							<td><a target="_blank" class="tablelink" href="index.shtml?type=${blog.blogType.typeId }">${blog.blogType.typeName }</a></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${blog.releaseDate }" /></td>
 							<td>
 								<a href="blog/toUpdate.do?id=${blog.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 

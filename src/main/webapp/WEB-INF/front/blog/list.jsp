@@ -31,7 +31,7 @@
 						  <c:forEach var="blog" items="${blogList}">
 						  	  <li style="margin-bottom: 20px">
 								<span class="title"><a href="blog/article/${blog.id}.shtml">${blog.title }</a></span>
-								<div class="img"><img src="static/uploadFiles/${blog.image }" alt="图片" width="140px"/></div>
+								<div class="img"><img src="images/cover/${blog.image }" alt="图片" width="140px"/></div>
 								<p style="text-indent:2em;">
 									<span class="summary">${blog.summary }...</span>
 								</p>

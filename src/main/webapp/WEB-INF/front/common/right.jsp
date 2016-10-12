@@ -16,7 +16,7 @@
 		<img src="static/images/user_icon.png" /> 关于博主
 	</div>
 	<div class="user_image">
-		<img src="static/images/${blogger.imageUrl }" alt="" width="100px" height="100px"/>
+		<img src="images/avatar/${blogger.imageUrl }" alt="" width="100px" height="100px"/>
 	</div>
 	<div class="nickName">${blogger.nickName }</div>
 	<div class="userSign">(${blogger.signature })</div>

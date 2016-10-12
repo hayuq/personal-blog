@@ -46,7 +46,7 @@
 		<span class="systemlogo2"></span>
 		<div class="loginbox loginbox1">
 			<ul>
-				<li><input id="username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''" /></li>
+				<li><input id="username" type="text" class="loginuser" value="admin" /></li>
 				<li><input id="password" type="password" class="loginpwd" value="密码" onclick="JavaScript:this.value=''" /></li>
 				<li>
 					<input type="button" class="loginbtn" value="登录" onclick="login()"/>

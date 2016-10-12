@@ -9,6 +9,9 @@
 	.scbtn { float: left; margin-top: 20px; margin-left: 10px;}
 </style>
 <!-- ueditor -->
+<!-- <script>
+	window.UEDITOR_HOME_URL = "/Blog/static/ueditor/"; //ueditor根目录
+</script> -->
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -21,24 +24,22 @@
 	});
 		
 	function checkData(){
-		var img = $("#img").val();
 		var title = $("#title").val();
 		var type = $("#type").val();
-		var keyword = $("#keyword").val();
 		var content = editor.getContent();
-		var summary = editor.getContentTxt().substr(0,300);
 		if(title.trim() == ''){
 			alert("请填写标题");
-			return;
+			return false;
 		}
 		if(type.trim() == 0){
 			alert("请选择类别");
-			return;
+			return false;
 		}
 		if(content.trim() == ''){
 			alert("博客内容不允许为空");
-			return;
+			return false;
 		}
+		return true;
 	}
 	
 	//图片上传前预览
@@ -69,7 +70,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blog/add.do" method="post" id="addForm" name="addForm" onsubmit="return checkData()" enctype="multipart/form-data">
+		<form action="blog/add.do" method="post" onsubmit="return checkData()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">博客标题</td>
@@ -113,8 +114,9 @@
 		   			<td><input type="text" id="keyword" name="keyword" class="scinput" style="width:300px"/>&nbsp;(多个关键字中间用空格隔开)</td>
 		   		</tr>
 			</table>
-			<input name="" type="submit" class="scbtn" value="发布博客" onclick="submitData()"/>
+			<input name="" type="submit" class="scbtn" value="发布博客"/>
 			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
+			<span id="msg">${msg }</span>
 		</form>
 	</div>
 </body>

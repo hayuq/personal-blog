@@ -17,7 +17,6 @@
 	</div>
 	
 	<div class="rightinfo">
-		<form action="blogger/modifyPassword.do" method="post">
 			<table class="table">
 				<tr>
 					<td style="width:50px">原密码<input type="hidden" name="id" id="id" value="${currentUser.id }"/></td>
@@ -35,16 +34,35 @@
 				</tr>
 			</table>
 			<input type="button" class="scbtn" value="保存" onclick="savePwd()"/>
+			<input type="button" class="scbtn" value="返回" onclick="history.back()"/>
 			<span id="errorInfo" style="font-size:16px"></span>
 		</form>
 	</div>
 <script type="text/javascript">
 	function savePwd(){
+		var newpwd = $("#newpwd").val();
+		var repwd = $("#repwd").val();
+		var oldpwd = $("#oldpwd").val();
+		if(oldpwd.trim() == ''){
+			$("#errorInfo").css("color","red");
+			$("#errorInfo").html("请输入原密码");
+			return;
+		}
+		if(newpwd.trim() == ''){
+			$("#errorInfo").css("color","red");
+			$("#errorInfo").html("请输入新密码");
+			return;
+		}
+		if(repwd.trim() == ''){
+			$("#errorInfo").css("color","red");
+			$("#errorInfo").html("请再次输入新密码");
+			return;
+		}
 		var params = {
-			"id":$("#id").val(),
-			"newpwd":$("#newpwd").val(),
-			"oldpwd":$("#oldpwd").val(),
-			"repwd":$("#repwd").val()
+			"id" : $("#id").val(),
+			"newpwd" : newpwd,
+			"oldpwd" : oldpwd,
+			"repwd" : repwd
 		};
 		$.post("blogger/modifyPassword.do",params,function(result){
 			if(result == '修改成功'){

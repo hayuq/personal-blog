@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.naming.directory.SearchControls;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.opensymphony.oscache.util.StringUtil;
@@ -97,14 +95,13 @@ public class BlogTypeAdminController {
 		return "redirect:/blogType/list.do";
 	}
 
-	//删除的同时将相关博客的类别置空
+	//删除的同时将相关博客的类别置为默认分类
 	@RequestMapping("/batch_delete")
 	public String batchDelete(Integer id) {
 		
-		//TODO 删除的同时将相关博客的类别置空，目前还存在问题，待解决
 		List<Blog> blogs = blogService.getByTypeId(id);
 		for(Blog blog : blogs){
-			blog.setTypeId(0);
+			blog.setTypeId(1);
 			blogService.update(blog);
 		}
 		blogTypeService.delete(id);

@@ -16,7 +16,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blogType/add.do" method="post">
+		<form action="blogType/add.do" method="post" enctype="application/x-www-form-urlencoded">
 			<table class="table">
 				<tr>
 					<td style="width:60px">类别名称</td>

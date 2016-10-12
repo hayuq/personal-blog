@@ -9,9 +9,9 @@
 	.scbtn { float: left; margin-top: 20px; margin-left: 10px;}
 </style>
 <!-- ueditor -->
-<script>
-  //var UEDITOR_HOME_URL = "/Blog/static/ueditor/"; //从项目的根目录开始
-</script>
+<!-- <script>
+	window.UEDITOR_HOME_URL = "/Blog/static/ueditor/"; //ueditor根目录
+</script> -->
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -22,39 +22,23 @@
 		});
 	});
 	
-	function checkData(){
-		var id = $("#id").val();
+	function checkBlog(){
 		var title = $("#title").val();
 		var type = $("#type").val();
-		var keyword = $("#keyword").val();
 		var content = editor.getContent();
-		var summary = editor.getContentTxt().substr(0,300);
 		if(title.trim() == ''){
 			alert("请填写标题");
-			return;
+			return false;
 		}
-		if(type.trim() == 0){
+		if(type.trim() == '0'){
 			alert("请选择类别");
-			return;
+			return false;
 		}
 		if(content.trim() == ''){
 			alert("博客内容不允许为空");
-			return;
+			return false;
 		}
-		
-		/* var params = {"id":id,"title":title,"content":content,"typeId":type,"summary":summary,"keyword":keyword};
-		
-		$.post("blog/update.do", params, function(result) {
-			if (result.success) {
-				alert("博客更新成功！");
-				$("#title").val('');
-				$("#type").val('');
-				$("#keyword").val('');
-				editor.setContent('');
-			} else {
-				alert("更新失败");
-			}
-		}, "json"); */
+		return true;
 	}
 	
 	//图片上传前预览
@@ -85,7 +69,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blog/update.do" method="post" onsubmit="return checkData()" enctype="multipart/form-data">
+		<form action="blog/update.do" method="post" onsubmit="return checkBlog()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">博客标题<input type="hidden" id="id" name="id" value="${blog.id}"/></td>
@@ -95,16 +79,17 @@
 					<td style="width:50px">所属类别</td>
 					<td>
 						<select class="select" id="type" name="typeId">
+							<option value="0">--请选择--</option>
 							<c:forEach var="blogType" items="${blogTypeList }">
-								<option value="${blogType.typeId }" <c:if test="${blog.typeId == blogType.typeId }">selected="seleted"</c:if>>${blogType.typeName }</option>
+								<option value="${blogType.typeId }" <c:if test="${blog.typeId == blogType.typeId }">selected="selected"</c:if>>${blogType.typeName }</option>
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="image" value="static/uploadFiles/${blog.image }" name="image" onchange="previewImg(this)"/>
-					<img id="preview" src="static/uploadFiles/${blog.image }" alt="图片" width="100px" height="100px"/></td>
+					<td><input type="file" id="img" name="img" onchange="previewImg(this)"/>
+					<img id="preview" src="images/cover/${blog.image }" alt="图片" width="100px" height="100px"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">博客内容</td>

@@ -17,16 +17,6 @@
 	</div>
 
 	<div class="rightinfo">
-		<!-- <div class="tools">
-			<form action="blogType/add.do" method="post">
-				<ul class="seachform">
-					<li><label>类别名称</label><input name="typeName" type="text" class="scinput"/></li>
-					<li><label>排序</label><input name="orderNo" type="text" class="scinput"/></li>
-					<li><input name="" type="submit" class="scbtn" value="添加分类" /></li>
-				</ul>
-			</form>
-		</div> -->
-
 		<table class="tablelist">
 			<thead>
 				<tr>
@@ -69,7 +59,7 @@
 	function deleteBlogType(id){
 		//查询该类别下是否存在文章
 		$.post("blogType/search.do",{"id":id},function(result){
-			if(result.count == 0 && confirm('确定删除该类别吗？')) {			
+			if(result.count == 0 && confirm('确定删除该类别吗？')) {
 				window.location.href='blogType/delete.do?id='+id;
 			}
 			else if(result.count > 0 && confirm('该类别下有'+result.count+'篇文章，删除将会把文章移出此分类，是否继续？')){
