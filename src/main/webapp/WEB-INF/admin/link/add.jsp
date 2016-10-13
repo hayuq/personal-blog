@@ -16,7 +16,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="link/add.do" method="post">
+		<form action="link/add.do" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:60px">链接名称</td>
