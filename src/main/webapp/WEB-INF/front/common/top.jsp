@@ -22,6 +22,7 @@
 	SyntaxHighlighter.all();       
 </script>
 <script type="text/javascript">
+	
 	function checkData(){
 		var q = $.trim($("#q").val());
 		if(q == ""){
@@ -34,8 +35,7 @@
 	function search(){
 		if(checkData()){
 			$.post("search.shtml",{"q":$("#q").val()},function(result){
-				window.location.href='blog/result.jsp';
-				document.write(result)
+				document.body.innerHTML = result
 			})
 		}
 	}
@@ -95,7 +95,7 @@
 		        <div class="form-group" >
 		          <input type="text" id="q" name="q" class="form-control" placeholder="请输入关键字搜索...">
 		        </div>
-		        <input type="button" class="btn btn-default" value="搜索" />
+		        <input type="submit" class="btn btn-default" value="搜索"/>
 		      </form>
 		    </div>
 		  </div>

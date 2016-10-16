@@ -70,8 +70,10 @@ public class IndexController {
 		
 		String pageCode = PageUtils.genPagination(request.getContextPath()+"/index.shtml", totalCount, currentPage, pageSize, param.toString());
 		model.addAttribute("pageCode",pageCode);
-		model.addAttribute("title", "文章列表");
-		
+		if(StringUtil.isEmpty(typeId))
+			model.addAttribute("title", "文章列表");
+		else
+			model.addAttribute("title", "分类列表");
 		ServletContext application = request.getServletContext();
 		List<BlogType> blogTypeList = blogTypeService.getTypeList();
 		for(BlogType blogType : blogTypeList){
@@ -95,9 +97,10 @@ public class IndexController {
 		
 		int currentPage = Integer.parseInt(StringUtil.isEmpty(page) ? "1" : page);
 		BlogIndex blogIndex = new BlogIndex();
-		System.out.println("======================blogIndex："+blogIndex);
-		request.setCharacterEncoding("utf-8");
-		System.out.println("=========================关键字："+q);
+		
+		//解决表单提交中文乱码
+		q = new String(q.getBytes("ISO-8859-1"),"utf-8");
+		
 		List<Blog> blogList = blogIndex.query(q);
 		model.addAttribute("q", q);
 		model.addAttribute("blogList", blogList);
@@ -108,4 +111,5 @@ public class IndexController {
 		model.addAttribute("pageCode",pageCode);
 		return "blog/result";
 	}
+	
 }

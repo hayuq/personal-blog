@@ -11,7 +11,11 @@ body {
     padding-bottom: 40px;
     letter-spacing: .6px;
 }
-
+.navbar-default{
+	background-image: linear-gradient(to bottom,#ccc 0,#f8f8f8 100%);
+}
+.navbar-default .navbar-brand:hover,.navbar-default ul li:hover{background:#f90;color:#f1fafa}
+.navbar-default .navbar-brand:active,.navbar-default ul li:active{background:#f90;color:#f1fafa}
 .block{
 	display:block;
 }

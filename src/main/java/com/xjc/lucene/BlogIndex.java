@@ -25,7 +25,7 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.search.highlight.Fragmenter;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
@@ -46,7 +46,7 @@ import com.xjc.service.BlogService;
 public class BlogIndex {
 
 	private static final String dirPath = "C:/lucene";
-	private Directory dir; //存储索引的目录
+	private static Directory dir; //存储索引的目录
 
 	public BlogIndex() {
 		try {
@@ -147,22 +147,25 @@ public class BlogIndex {
 		booleanQuery.add(query2, BooleanClause.Occur.SHOULD);
 		
 		// 查询结果信息类
-		TopDocs hits = searcher.search(booleanQuery.build(), 100);// 最多返回100个document
+		TopScoreDocCollector collector = TopScoreDocCollector.create(100);
+		//TopDocs hits = searcher.search(booleanQuery.build(), 100);// 最多返回100个document
+		searcher.search(booleanQuery.build(), collector);
+		ScoreDoc[] hits = collector.topDocs().scoreDocs;
 		QueryScorer scorer = new QueryScorer(query);
 		Fragmenter fragmenter = new SimpleSpanFragmenter(scorer);
 
-		// 用这个进行高亮显示，默认是<b>..</b>
-		SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<b><font color='red'>", "</font></b>");
-		// 构造高亮:指定高亮的格式,指定查询评分QueryScorer
+		// 指定高亮显示的样式，默认是<b>..</b>
+		SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<font color='red'>", "</font>");
 		Highlighter highlighter = new Highlighter(simpleHTMLFormatter, scorer);
 		highlighter.setTextFragmenter(fragmenter);
 
 		List<Blog> blogList = new LinkedList<Blog>();
-		for (ScoreDoc scoreDoc : hits.scoreDocs) {
-			Document doc = searcher.doc(scoreDoc.doc);
+		for (ScoreDoc hit : hits) {
+			Document doc = searcher.doc(hit.doc);
 			
 			BlogService blogService = (BlogService) new ClassPathXmlApplicationContext("applicationContext.xml").getBean("blogService");
-			Blog blog = blogService.findById(Integer.parseInt(doc.get(("id"))));
+			Integer id = Integer.parseInt(doc.get("id"));
+			Blog blog = blogService.findById(id);
 			String title = doc.get("title");
 			String content = StringEscapeUtils.escapeHtml4(doc.get("content"));
 			if (title != null) {
