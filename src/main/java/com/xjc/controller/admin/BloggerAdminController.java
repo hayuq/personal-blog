@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,7 +46,7 @@ public class BloggerAdminController {
 
 	@RequestMapping("/modifyInfo")
 	public String modifyInfo(Blogger blogger, @RequestParam(value = "img", required = false) MultipartFile file,
-			Model model, HttpServletResponse response) {
+			Model model, HttpServletRequest request) {
 
 		// 获取原始文件名
 		String fileName = file.getOriginalFilename();
@@ -57,16 +56,14 @@ public class BloggerAdminController {
 			// 生成新文件名
 			imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
 					+ fileName.substring(index);
-			handleFileUpload(file, imageUrl);
+			handleFileUpload(file, imageUrl, request);
 			blogger.setImageUrl(imageUrl);
 		}
 		int result = bloggerService.update(blogger);
-		if (result > 0) {
-			ResponseUtils.writeHtml(response, "<script>alert('保存成功')</script>");
-		}
-		else{
-			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
-		}
+		if (result > 0) 
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
 		return null;
 	}
 
@@ -90,12 +87,12 @@ public class BloggerAdminController {
 		return null;
 	}
 
-	private void handleFileUpload(MultipartFile file, String imageUrl) {
+	private void handleFileUpload(MultipartFile file, String imageUrl,HttpServletRequest request) {
 		InputStream is;
 		try {
 			// 获取输入流
 			is = file.getInputStream();
-			String filePath = "C:/uploadFiles/avatar/" + imageUrl;
+			String filePath = request.getServletContext().getRealPath("images/avatar/") + imageUrl;
 			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 			// 判断上传目录是否存在
 			if (!dir.exists()) {

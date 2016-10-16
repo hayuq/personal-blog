@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.opensymphony.oscache.util.StringUtil;
+import com.xjc.lucene.BlogIndex;
 import com.xjc.model.Blog;
 import com.xjc.model.PageBean;
 import com.xjc.service.BlogService;
 import com.xjc.service.BlogTypeService;
 import com.xjc.service.CommentService;
 import com.xjc.util.PageUtils;
-import com.xjc.util.ResponseUtils;
 
 /**
  * 博客Controller
@@ -44,6 +43,8 @@ public class BlogAdminController {
 
 	@Resource
 	CommentService commentService;
+	
+	private BlogIndex blogIndex = new BlogIndex();
 
 	@RequestMapping("/list")
 	public String list(String page, String firstDate, String secondDate, Integer typeId, String title, Model model,
@@ -94,7 +95,7 @@ public class BlogAdminController {
 
 	@RequestMapping("/add")
 	public String add(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
-			HttpServletResponse response) {
+			Model model,HttpServletRequest request) throws IOException {
 
 		// 获取原始文件名
 		String fileName = file.getOriginalFilename();
@@ -104,7 +105,7 @@ public class BlogAdminController {
 			//生成新文件名
 			imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
 				+ fileName.substring(index);
-			handleFileUpload(file, imageUrl);
+			handleFileUpload(file, imageUrl,request);
 			blog.setImage(imageUrl);
 		}
 		String content = blog.getContent();
@@ -113,19 +114,18 @@ public class BlogAdminController {
 		else
 			blog.setSummary(content);
 		int result = blogService.add(blog);
-		if (result > 0){			
-			ResponseUtils.writeHtml(response, "<script>alert('保存成功')</script>");
-			return "redirect:/blog/list.do";
-		}
-		else{
-			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
-			return "redirect:/blog/add.do";
-		}
+		//添加博客索引
+		blogIndex.createIndex(blog);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
 	}
 
 	@RequestMapping("/update")
 	public String update(Blog blog, @RequestParam(value = "img", required = false) MultipartFile file,
-			HttpServletResponse response) {
+			Model model,HttpServletRequest request) throws IOException{
 
 		// 获取原始文件名
 		String fileName = file.getOriginalFilename();
@@ -135,7 +135,7 @@ public class BlogAdminController {
 			//生成新文件名
 			imageUrl = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + System.currentTimeMillis()
 				+ fileName.substring(index);
-			handleFileUpload(file,imageUrl);
+			handleFileUpload(file,imageUrl,request);
 			blog.setImage(imageUrl);
 		}
 		String content = blog.getContent();
@@ -144,37 +144,38 @@ public class BlogAdminController {
 		else
 			blog.setSummary(content);
 		int result = blogService.update(blog);
-		if (result > 0){			
-			ResponseUtils.writeHtml(response, "<script>alert('保存成功')</script>");
-			return "redirect:/blog/list.do";
-		}
-		else{
-			ResponseUtils.writeHtml(response, "<script>alert('保存失败')</script>");
-			return "redirect:/blog/toUpdate.do?id="+blog.getId();
-		}
+		//更新博客索引
+		blogIndex.updateIndex(blog);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
 	}
 
 	@RequestMapping("/delete")
-	public String delete(Integer id) {
+	public String delete(Integer id) throws IOException {
 		blogService.delete(id);
+		blogIndex.deleteIndex(String.valueOf(id));
 		return "redirect:/blog/list.do";
 	}
 
 	@RequestMapping("/deletes")
-	public String deletes(String ids) {
+	public String deletes(String ids) throws IOException {
 		String[] blogIds = ids.split(",");
 		for (String id : blogIds) {
 			blogService.delete(Integer.parseInt(id));
+			blogIndex.deleteIndex(id);
 		}
 		return "redirect:/blog/list.do";
 	}
 	
-	private void handleFileUpload(MultipartFile file,String imageUrl) {
+	private void handleFileUpload(MultipartFile file,String imageUrl,HttpServletRequest request) {
 		InputStream is;
 		try {
 			// 获取输入流
 			is = file.getInputStream();
-			String filePath = "C:/uploadFiles/cover/" + imageUrl;
+			String filePath = request.getServletContext().getRealPath("images/cover/") + imageUrl;
 			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 			//判断上传目录是否存在
 			if (!dir.exists()) {

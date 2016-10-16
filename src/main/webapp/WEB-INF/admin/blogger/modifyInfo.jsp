@@ -9,7 +9,7 @@
 <script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="static/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -23,7 +23,7 @@
 		<form action="blogger/modifyInfo.do" method="post" onsubmit="return checkInfo()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
-					<td style="width:50px">昵称<input type="hidden" id="id" name="id" value="${blogger.id}"/></td>
+					<td style="width:50px">昵称<input type="hidden" id="id" name="id" value="${blogger.id}"/><input type="hidden" id="msg" value="${msg}"/></td>
 					<td><input id="nickName" name="nickName" type="text" class="scinput" value="${blogger.nickName }"/></td>
 				</tr>
 				<tr>
@@ -77,23 +77,6 @@
 			return false;
 		}
 		return true;
-	}
-	
-	//图片上传前预览
-	function previewImg(file) {
-		var prevImg = document.getElementById('preview');
-		if (file.files && file.files[0]) {
-			//创建FileReader对象
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				prevImg.src = evt.target.result;
-			}
-			// 读取File对象的数据
-			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
-			reader.readAsDataURL(file.files[0]);
-		} else {
-			prevImg.src = file.value;
-		}
 	}
 </script>
 </body>

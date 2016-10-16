@@ -41,25 +41,9 @@
 		return true;
 	}
 	
-	//图片上传前预览
-	function previewImg(file) {
-		var prevImg = document.getElementById('preview');
-		if (file.files && file.files[0]) {
-			//创建FileReader对象
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				prevImg.src = evt.target.result;
-			}
-			// 读取File对象的数据
-			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
-			reader.readAsDataURL(file.files[0]);
-		} else {
-			prevImg.src = file.value;
-		}
-	}
 </script>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -72,7 +56,7 @@
 		<form action="blog/update.do" method="post" onsubmit="return checkBlog()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
-					<td style="width:50px">博客标题<input type="hidden" id="id" name="id" value="${blog.id}"/></td>
+					<td style="width:50px">博客标题<input type="hidden" id="id" name="id" value="${blog.id}"/><input type="hidden" id="msg" value="${msg}"/></td>
 					<td><input id="title" name="title" type="text" class="scinput" style="width:300px" value="${blog.title }"/></td>
 				</tr>
 				<tr>

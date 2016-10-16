@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" contentType="text/html; charset=UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,12 +23,20 @@
 </script>
 <script type="text/javascript">
 	function checkData(){
-		var q=document.getElementById("q").value.trim();
-		if(q==null || q==""){
+		var q = $.trim($("#q").val());
+		if(q == ""){
 			alert("请输入您要查询的关键字！");
 			return false;
-		}else{
-			return true;
+		}
+		return true;
+	}
+	
+	function search(){
+		if(checkData()){
+			$.post("search.shtml",{"q":$("#q").val()},function(result){
+				window.location.href='blog/result.jsp';
+				document.write(result)
+			})
 		}
 	}
 	
@@ -81,13 +89,13 @@
 		        <li><a href="blogger/info.shtml"><font color="#000">生活点滴</font></a></li>
 		        <li><a href="index.shtml"><font color="#000">程序相关</font></a></li>
 		        <li><a href="index.shtml"><font color="#000">互联网络</font></a></li>
-		        <li><a href="blogger/info.shtml"><font color="#000">留言板</font></a></li>
+		       <!--  <li><a href="blogger/info.shtml"><font color="#000">留言板</font></a></li> -->
 		      </ul>
-		     <form action="blog/q.html" class="navbar-form navbar-right" role="search" method="post" onsubmit="return checkData()">
+		     <form action="search.shtml" class="navbar-form navbar-right" role="search" method="post" onsubmit="return checkData()">
 		        <div class="form-group" >
-		          <input type="text" id="q" name="q" value="" class="form-control" placeholder="请输入关键字搜索...">
+		          <input type="text" id="q" name="q" class="form-control" placeholder="请输入关键字搜索...">
 		        </div>
-		        <button type="submit" class="btn btn-default">搜索</button>
+		        <input type="button" class="btn btn-default" value="搜索" />
 		      </form>
 		    </div>
 		  </div>

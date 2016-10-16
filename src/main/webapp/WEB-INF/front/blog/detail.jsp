@@ -94,9 +94,9 @@
 										</c:when>
 								<c:otherwise>
 									<c:forEach var="keyword" items="${keywords }">
-										<a href="blog/q.shtml?q=${keyword}" target="_blank"
+										<a href="search.shtml?q=${keyword}" target="_blank"
 											style="color: #337ab7">${keyword }</a>&nbsp;&nbsp;
-											</c:forEach>
+									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -133,7 +133,7 @@
 										<c:when test="${status.index < 8 }">
 											<div class="comment">
 												<div class="img" style="border:none">
-													<img alt="头像" src="static/uploadFiles/20161008/100821202012.jpg" width="40" height="40" style="border-radius:50%">
+													<img alt="头像" src="images/cover/${blog.image }" width="40" height="40" style="border-radius:50%">
 												</div>
 												<div>
 													<%-- <span style="margin-right: 20px"># ${status.index+1 }楼</span> --%>
@@ -155,7 +155,7 @@
 											<div class="otherComment">
 												<div class="comment">
 													<div class="img" style="border:none">
-														<img alt="头像" src="static/uploadFiles/20161008/100821202012.jpg" width="40" height="40" style="border-radius:50%">
+														<img alt="头像" src="images/cover/${blog.image }" width="40" height="40" style="border-radius:50%">
 													</div>
 													<div>
 														<%-- <span style="margin-right: 20px"># ${status.index+1 }楼</span> --%>
@@ -198,7 +198,7 @@
 								</p>
 							</div>
 							<div class="img">
-								<img alt="头像" src="static/uploadFiles/20161008/100821202012.jpg" width="50" height="50">
+								<img alt="头像" src="images/cover/${blog.image }" width="50" height="50">
 							</div>
 							<div style="margin-left:20px">
 								<textarea style="width: 92%" rows="5" id="content" name="content" placeholder="来说两句吧..."></textarea>

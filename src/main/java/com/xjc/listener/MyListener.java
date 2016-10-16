@@ -38,7 +38,7 @@ public class MyListener implements ServletContextListener,ApplicationContextAwar
 
     public void contextInitialized(ServletContextEvent arg0)  { 
     	
-		/*//获取ServletContext对象
+		//获取ServletContext对象
 		ServletContext application = arg0.getServletContext();
 		
 		//从Spring的IOC容器中获取Bean
@@ -56,7 +56,7 @@ public class MyListener implements ServletContextListener,ApplicationContextAwar
 		application.setAttribute("readingRankList", blogService.getTopReading());
 		application.setAttribute("reviewRankList", blogService.getTopReview());
 		application.setAttribute("blogger", bloggerService.findById(1));
-		application.setAttribute("linkList", linkService.getLinkList());*/
+		application.setAttribute("linkList", linkService.getLinkList());
     }
 
 }

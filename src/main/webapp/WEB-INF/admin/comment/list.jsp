@@ -40,6 +40,7 @@
 				<tr>
 					<th><input type="checkbox" onclick="selectAll('chk',this)" /></th>
 					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
+					<th>评论文章</th>
 					<th>评论内容</th>
 					<th>评论时间</th>
 					<th>评论人</th>
@@ -53,6 +54,7 @@
 						<tr>
 							<td><input name="chk" type="checkbox" value="${comment.id }" /></td>
 							<td>${index.count }</td>
+							<td><a class="tablelink" target="_blank" href="blog/article/${comment.blog.id }.shtml">${comment.blog.title }</a></td>
 							<td>${comment.content }</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.commentDate }" /></td>
 							<td>${comment.userName }</td>

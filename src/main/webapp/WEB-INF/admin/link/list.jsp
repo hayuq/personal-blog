@@ -6,7 +6,7 @@
 <title>链接管理</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -20,7 +20,7 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input type="checkbox" onclick="selectAll('chk',this)" /></th>
+					<th><input type="checkbox" onclick="selectAll('chk',this)" /><input type="hidden" id="msg"  value="${msg }"/></th>
 					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
 					<th>链接名称</th>
 					<th>链接地址</th>

@@ -6,9 +6,10 @@
 <title>Insert title here</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
-<body style="background:url(static/images/admin/topbg.gif) repeat-x;">
+<body style="color:#f1fafa;background:rgba(0,0,0,0.6)">
 	<div class="topleft">
-    	<a href="main.html" target="_parent"><img src="static/images/admin/logo2.png" title="系统首页" /></a>
+    	<!-- <a href="main.html" target="_parent"><img src="static/images/admin/logo2.png" title="系统首页" /></a> -->
+    	<span style="font-size:16px;padding:10px">博客系统后台管理</span>
     </div>
         
    <!--  <ul class="nav">
@@ -22,15 +23,16 @@
     <li><a href="frame/shop_main_frame.do"  target="centerFrame"><img src="static/images/admin/icon02.png" title="店铺管理" /><h2>店铺管理</h2></a></li>
     </ul> -->
             
-    <div class="topright">    
+    <div class="topright"> 
 	    <ul>
-		    <li><span><img src="static/images/admin/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
-		    <li><a href="#">关于</a></li>
+		    <!-- <li><span><img src="static/images/admin/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li> -->
+		    <li><a href="index.shtml">回首页</a></li>
 		    <li><a href="javascript:void(0)" onclick="window.parent.location.href='admin/logout.do'">退出</a></li>
+		    <li>  欢迎您：${currentUser.userName } </li>
 	    </ul>
 	     
 	    <div class="user">
-		   <span> 欢迎您：${currentUser.userName }</span>
+		  
 		    <!-- <i>消息</i>
 		    <b>5</b> -->
 	    </div>

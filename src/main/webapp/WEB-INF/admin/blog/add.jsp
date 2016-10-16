@@ -42,25 +42,9 @@
 		return true;
 	}
 	
-	//图片上传前预览
-	function previewImg(file) {
-		var prevImg = document.getElementById('preview');
-		if (file.files && file.files[0]) {
-			//创建FileReader对象
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				prevImg.src = evt.target.result;
-			}
-			// 读取File对象的数据
-			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
-			reader.readAsDataURL(file.files[0]);
-		} else {
-			prevImg.src = file.value;
-		}
-	}
 </script>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -116,7 +100,7 @@
 			</table>
 			<input name="" type="submit" class="scbtn" value="发布博客"/>
 			<input name="" type="button" class="scbtn" value="返回" onclick="history.back()" />
-			<span id="msg">${msg }</span>
+			<input type="hidden" id="msg" value="${msg }"/>
 		</form>
 	</div>
 </body>

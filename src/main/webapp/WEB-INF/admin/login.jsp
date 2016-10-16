@@ -9,12 +9,14 @@
 	$(function() {
 		$('.loginbox').css({
 			'position' : 'absolute',
-			'left' : ($(window).width() - 692) / 2
+			'left' : ($(window).width() - 350) / 2,
+			'top' : ($(window).height() - 373) / 2
 		});
 		$(window).resize(function() {
 			$('.loginbox').css({
 				'position' : 'absolute',
-				'left' : ($(window).width() - 692) / 2
+				'left' : ($(window).width() - 350) / 2,
+				'top' : ($(window).height() - 373) / 2
 			});
 		})
 	});
@@ -23,15 +25,11 @@
 </head>
 
 <body
-	style="background-color: #1c77ac; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
-
-
-
+	style="background-image: url(static/images/admin/banner_slide_01.jpg); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
 	<div id="mainBody">
 		<div id="cloud1" class="cloud"></div>
 		<div id="cloud2" class="cloud"></div>
 	</div>
-
 
 	<div class="logintop">
 		<span>欢迎登录后台管理平台</span>
@@ -43,9 +41,19 @@
 	</div>
 
 	<div class="loginbody">
-		<span class="systemlogo2"></span>
-		<div class="loginbox loginbox1">
-			<ul>
+		<div class="loginbox">
+			<span style="font-size:16px;color:#afc5d2">博客系统管理登录</span>
+				<div style="margin-bottom:20px;margin-top:20px">
+					<input id="username" type="text" class="loginuser" placeholder="用户名"/>
+				</div>
+				<div style="margin-bottom:20px">
+					<input id="password" type="password" class="loginpwd" placeholder="密码"/>
+				</div>
+				<div style="float:left;padding-left:60px">
+					<input type="button" class="loginbtn" value="登录" onclick="login()"/>
+					<input type="button" class="resetbtn" value="重置" onclick="reset()"/>
+				</div>
+			<!-- <ul>
 				<li><input id="username" type="text" class="loginuser" value="admin" /></li>
 				<li><input id="password" type="password" class="loginpwd" value="密码" onclick="JavaScript:this.value=''" /></li>
 				<li>
@@ -53,7 +61,7 @@
 					<label><input name="" type="checkbox" value="" checked="checked" />记住密码</label>
 					<label><a href="#">忘记密码？</a></label>
 				</li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 <script type="text/javascript">
@@ -67,6 +75,11 @@
 			}
 			window.location.href="admin/index.do";
 		});
+	}
+	
+	function reset(){
+		$("#username").val('');
+		$("#password").val('');
 	}
 </script>
 </body>

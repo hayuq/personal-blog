@@ -27,6 +27,10 @@
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.commentDate }" /></td>
 				</tr>
 				<tr>
+					<td style="width:50px">评论文章 </td>
+					<td>${comment.blog.title }</td>
+				</tr>
+				<tr>
 					<td style="width:50px">是否通过</td>
 					<td>
 						<select class="select" id="isPass" name="isPass">

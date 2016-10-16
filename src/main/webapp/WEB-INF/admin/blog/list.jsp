@@ -73,7 +73,7 @@
 					class="blue">${pagination.pageSize }</i>&nbsp;条，当前显示第&nbsp;<i
 					class="blue">${pagination.currentPage }&nbsp;/&nbsp;${pagination.totalPage }&nbsp;</i>页
 			</div>
-			<ul class="paginList"> ${pageCode } </ul>
+			<ul class="paginList"> ${pageCode } </ul>${msg }
 		</div>
 	</div>
 </body>

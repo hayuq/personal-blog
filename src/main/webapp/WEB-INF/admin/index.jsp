@@ -11,7 +11,7 @@
 %>
 </head>
 <!-- 后台页面主框架 -->
-<frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
+<frameset rows="50,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="admin/top.do" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="admin/left.do" name="leftFrame" scrolling="no" noresize="noresize" id="leftFrame" title="leftFrame" />

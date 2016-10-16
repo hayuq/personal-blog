@@ -38,4 +38,11 @@ public class LinkAdminController {
 		linkService.delete(id);
 		return "redirect:/link/list.do";
 	}
+	
+	@RequestMapping("/deletes")
+	public String deletes(String ids){
+		for(String id : ids.split(","))
+			linkService.delete(Integer.parseInt(id));
+		return "redirect:/link/list.do";
+	}
 }

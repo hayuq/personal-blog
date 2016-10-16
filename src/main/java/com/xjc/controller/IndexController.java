@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.opensymphony.oscache.util.StringUtil;
+import com.xjc.lucene.BlogIndex;
 import com.xjc.model.Blog;
 import com.xjc.model.BlogType;
 import com.xjc.model.PageBean;
@@ -44,7 +45,8 @@ public class IndexController {
 	LinkService linkService;
 	
 	@RequestMapping("/index")
-	public String index(String page,@RequestParam(value="type",required=false)String typeId,String releaseDate,Model model,HttpServletRequest request){
+	public String index(String page,@RequestParam(value="type",required=false)String typeId, String releaseDate,
+			Model model,HttpServletRequest request) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		int currentPage = Integer.parseInt(StringUtil.isEmpty(page) ? "1" : page);
 		PageBean pageBean=new PageBean(currentPage,8);
@@ -82,5 +84,28 @@ public class IndexController {
 		application.setAttribute("blogger", bloggerService.findById(1));
 		application.setAttribute("linkList", linkService.getLinkList());
 		return "blog/list";
+	}
+	
+	/**
+	 * 根据关键词查询博客
+	 * @throws Exception
+	 */
+	@RequestMapping("/search")
+	public String search(String page,String q, Model model,HttpServletRequest request) throws Exception{
+		
+		int currentPage = Integer.parseInt(StringUtil.isEmpty(page) ? "1" : page);
+		BlogIndex blogIndex = new BlogIndex();
+		System.out.println("======================blogIndex："+blogIndex);
+		request.setCharacterEncoding("utf-8");
+		System.out.println("=========================关键字："+q);
+		List<Blog> blogList = blogIndex.query(q);
+		model.addAttribute("q", q);
+		model.addAttribute("blogList", blogList);
+		int totalCount = blogList.size();
+		model.addAttribute("resultCount",totalCount);
+		String pageCode = PageUtils.genPagination(request.getContextPath()+"/search.shtml", 
+				totalCount, currentPage, 6, StringUtil.isEmpty(q) ? "" : "q="+q);
+		model.addAttribute("pageCode",pageCode);
+		return "blog/result";
 	}
 }

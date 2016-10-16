@@ -7,6 +7,7 @@
 <html>
 <head>
 	<title>Promising的博客</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script>
 		/* var _hmt = _hmt || [];
 		(function() {

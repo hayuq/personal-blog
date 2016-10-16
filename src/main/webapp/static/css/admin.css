@@ -1,10 +1,4 @@
 @charset "utf-8";
-/* CSS Document */
-/***
- * uimaker
- * http://www.uimaker.com
- * e-mail: admin@uimaker.com
- */
 *{font-size:9pt;border:0;margin:0;padding:0;}
 body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
 ul{display:block;margin:0;padding:0;list-style:none;}
@@ -31,31 +25,16 @@ h2{font-weight:normal;}
 .logintop ul li{float:left; margin-left:20px; line-height:47px;}
 .logintop ul li a{color:#afc5d2;}
 .logintop ul li a:hover{color:#fff;}
-.loginbody{background:url(../images/admin/loginbg3.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
-.systemlogo{background:url(../images/admin/logo.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
+.loginbody{width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
+.logintitle{background:none;width:100%; height:71px; margin:0 auto;}
 .systemlogo1{background:url(../images/admin/logo1.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
 .systemlogo2{background:url(../images/admin/logo2.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
-.loginbox{width:692px; height:336px; background:url(../images/admin/logininfo.png) no-repeat; margin-top:30px;}
-.loginbox ul{margin-top:88px; margin-left:285px;}
-.loginbox ul li{margin-bottom:25px;}
-.loginbox ul li label{color:#687f92; padding-left:25px;}
-.loginbox ul li label a{color:#687f92;}
-.loginbox ul li label a:hover{color:#3d96c9;}
-.loginbox ul li label input{margin-right:5px;}
-.loginbox,.loginbox1,.loginbox2,.loginbox3,.loginbox4{width:692px; height:373px;margin-top:30px;}
-.loginuser{width:299px; height:48px; background:url(../images/admin/loginuser.png) no-repeat; border:none; line-height:48px; padding-left:44px; font-size:14px; }
-.loginpwd{width:299px; height:48px; background:url(../images/admin/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; }
-.loginbtn{width:111px;height:35px; background:url(../images/admin/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;}
-.loginbm{height:50px; line-height:50px; text-align:center; background:url(../images/admin/loginbg2.png) repeat-x;position:absolute; bottom:0; width:100%; color:#0b3a58;}
-.loginbm a{font-weight:bold;color:#0b3a58;}
-.loginbm a:hover{color:#fff;}
-
-.loginbox1{background:url(../images/admin/logininfo1.png) no-repeat;}
-.loginbox1 ul li{margin-bottom:16px;}
-.loginbox2{background:url(../images/admin/logininfo2.png) no-repeat;}
-.loginbox2 ul li{margin-bottom:16px;}
-.loginbox3{background:url(../images/admin/logininfo3.png) no-repeat;}
-.loginbox3 ul li{margin-bottom:16px;}
+.loginbox{background:rgba(0,0,0,0.52);border-radius:5px;padding-top:20px;color:#f1fafa}
+.loginbox,.loginbox1,.loginbox2,.loginbox3,.loginbox4{width:350px; height:220px;text-align:center}
+.loginuser{width:220px; height:35px; background:none; border:1px solid #ccc;border-radius:4px; line-height:35px; padding-left:10px; font-size:14px;color:#bbb }
+.loginpwd{width:220px; height:35px; background:none; border:1px solid #ccc;border-radius:4px;line-height:35px; padding-left:10px; font-size:14px;color:#bbb }
+.loginbtn{width:80px;height:30px; background:#3B95C8; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; padding:5px;border-radius:3px}
+.resetbtn{margin-left:70px;width:80px;height:30px; background:#F90; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; padding:5px;border-radius:3px}
 .yzm{width:341px; height:46px; background:url(../images/admin/yzmbg.png) no-repeat; padding-bottom:5px;}
 .yzm span{display:block; float:left;width:227px; height:46px;}
 .yzm span input{background:none; border:none; width:183px; height:46px; line-height:46px;padding-left:44px;font-size:14px; color:#cee4f1;}
@@ -63,7 +42,6 @@ h2{font-weight:normal;}
 
 .loginbody1{background:url(../images/admin/loginbg4.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
 .systemlogo, .systemlogo1, .systemlogo2{width:100%; height:71px; margin-top:50px; text-align:center;}
-.loginbox0{width:810px;margin-top:0px;height:252px;}
 .loginlist{width:810px; overflow:hidden;}
 .loginlist{margin-top:50px;}
 .loginlist li{float:left; margin-left:150px; margin-right:3px;}
@@ -74,10 +52,10 @@ h2{font-weight:normal;}
 
 
 /*top.html*/
-.header{height:88px;}
-.topleft{height:88px;background:url(../images/admin/topleft.jpg) no-repeat;float:left; width:320px;}
+.header{height:30px;}
+.topleft{height:30px;float:left; width:320px;}
 .topleft img{margin-top:12px;}
-.topright{height:88px;background:url(../images/admin/topright.jpg) no-repeat right;float:right;}
+.topright{height:30px;float:right;}
 .nav{float:left; position: absolute; left:320px;}
 .nav li{float:left;width:87px;height:88px; text-align:center;}
 .nav li a{display:block;width:87px;height:88px;-moz-transition: none; transition: background-color 0.3s linear; -moz-transition: background-color 0.3s linear; -webkit-transition: background-color 0.3s linear; -o-transition: background-color 0.3s linear; }

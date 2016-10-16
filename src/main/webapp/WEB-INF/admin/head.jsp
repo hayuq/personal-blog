@@ -10,7 +10,6 @@
 <link href="static/css/admin.css" rel="stylesheet"/>
 <link href="static/css/select.css" rel="stylesheet"/>
 <script type="text/javascript" src="static/js/jquery.min.js"></script>
-<script type="text/javascript" src="static/js/cloud.js"></script>
 <script type="text/javascript" src="static/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="static/js/batch_delete.js"></script>
 <script type="text/javascript" src="static/js/select-ui.min.js"></script>
@@ -28,4 +27,26 @@
 		$('.tablelist tbody tr:odd').addClass('odd');
 		
 	});
+	
+	//图片上传前预览
+	function previewImg(file) {
+		var prevImg = document.getElementById('preview');
+		if (file.files && file.files[0]) {
+			//创建FileReader对象
+			var reader = new FileReader();
+			reader.onload = function(evt) {
+				prevImg.src = evt.target.result;
+			}
+			// 读取File对象的数据
+			// 当FileReader对象通过readAsDataURL读取数据成功后，就会触发load事件。
+			reader.readAsDataURL(file.files[0]);
+		} else {
+			prevImg.src = file.value;
+		}
+	}
+	
+	function showMsg(){
+		var msg = $("#msg").val();
+		if(msg) alert(msg);
+	}
 </script>

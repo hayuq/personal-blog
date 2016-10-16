@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -6,7 +6,7 @@
 <title>添加链接</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -16,7 +16,7 @@
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="link/add.do" method="post">
+		<form action="link/add.do" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:60px">链接名称</td>
@@ -33,6 +33,7 @@
 			</table>
 			<input type="submit" class="scbtn" value="保存"/>
 			<input type="button" class="scbtn" value="返回" onclick="history.back()" />
+			<input type="hidden" id="msg" value="${msg }"/>
 		</form>
 	</div>
 </body>
