@@ -133,11 +133,7 @@
 										<c:when test="${status.index < 8 }">
 											<div class="comment">
 												<div class="img" style="border:none">
-<<<<<<< HEAD
 													<img alt="头像" src="images/cover/${blog.image }" width="40" height="40" style="border-radius:50%">
-=======
-													<img alt="头像" src="images/avatar/20161008/100821202012.jpg" width="40" height="40" style="border-radius:50%">
->>>>>>> branch 'master' of https://github.com/xiongjuncheng/MyBlog.git
 												</div>
 												<div>
 													<%-- <span style="margin-right: 20px"># ${status.index+1 }楼</span> --%>
@@ -159,11 +155,7 @@
 											<div class="otherComment">
 												<div class="comment">
 													<div class="img" style="border:none">
-<<<<<<< HEAD
 														<img alt="头像" src="images/cover/${blog.image }" width="40" height="40" style="border-radius:50%">
-=======
-														<img alt="头像" src="images/avatar/20161008/100821202012.jpg" width="40" height="40" style="border-radius:50%">
->>>>>>> branch 'master' of https://github.com/xiongjuncheng/MyBlog.git
 													</div>
 													<div>
 														<%-- <span style="margin-right: 20px"># ${status.index+1 }楼</span> --%>
@@ -206,11 +198,7 @@
 								</p>
 							</div>
 							<div class="img">
-<<<<<<< HEAD
 								<img alt="头像" src="images/cover/${blog.image }" width="50" height="50">
-=======
-								<img alt="头像" src="images/avatar/20161008/100821202012.jpg" width="50" height="50">
->>>>>>> branch 'master' of https://github.com/xiongjuncheng/MyBlog.git
 							</div>
 							<div style="margin-left:20px">
 								<textarea style="width: 92%" rows="5" id="content" name="content" placeholder="来说两句吧..."></textarea>
