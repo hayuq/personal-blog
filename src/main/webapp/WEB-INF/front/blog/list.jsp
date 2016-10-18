@@ -51,9 +51,11 @@
 						</ul>
 					</div>
 			   </div>
+			<c:if test="${blogList.size()>8}">
 				<div>
 					  <ul class="pagination"> ${pageCode } </ul>
 				 </div>
+			</c:if>
 		</div>
 		<div class="col-md-3">
 			<jsp:include page="/WEB-INF/front/common/right.jsp"/>
