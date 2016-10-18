@@ -18,4 +18,6 @@ public interface BloggerMapper {
     int updateByPrimaryKey(Blogger record);
 
 	Blogger findByName(String name);
+	
+	Blogger find();
 }
