@@ -135,4 +135,8 @@
   <select id="findByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
   	SELECT * FROM blogger where user_name = #{name}
   </select>
+  
+  <select id="find" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM blogger LIMIT 0,1
+  </select>
 </mapper>
