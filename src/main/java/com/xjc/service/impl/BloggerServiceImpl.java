@@ -14,8 +14,8 @@ public class BloggerServiceImpl implements BloggerService {
 	@Resource
 	BloggerMapper bloggerMapper;
 	
-	public Blogger findById(Integer id) {
-		return bloggerMapper.selectByPrimaryKey(id);
+	public Blogger find() {
+		return bloggerMapper.find();
 	}
 
 	public Blogger findByName(String name) {
