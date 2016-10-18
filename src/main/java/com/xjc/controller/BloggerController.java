@@ -18,7 +18,7 @@ public class BloggerController {
 	@RequestMapping("/info")
 	public String info(Model model){
 		
-		model.addAttribute("blogger", bloggerService.findById(1));
+		model.addAttribute("blogger", bloggerService.find();
 		return "blogger/info";
 	}
 }
