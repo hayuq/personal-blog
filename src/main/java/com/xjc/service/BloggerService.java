@@ -4,7 +4,7 @@ import com.xjc.model.Blogger;
 
 public interface BloggerService {
 
-	public Blogger findById(Integer id);
+	public Blogger find();
 	
 	public Blogger findByName(String name);
 	
