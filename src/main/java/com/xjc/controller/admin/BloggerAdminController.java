@@ -35,7 +35,7 @@ public class BloggerAdminController {
 
 	@RequestMapping("/toModifyInfo")
 	public String toModifyInfo(Model model) {
-		model.addAttribute("blogger", bloggerService.findById(1));
+		model.addAttribute("blogger", bloggerService.find();
 		return "blogger/modifyInfo";
 	}
 
@@ -71,7 +71,7 @@ public class BloggerAdminController {
 	public String modifyPassword(String newpwd, String oldpwd, String repwd, HttpServletResponse response,
 			HttpServletRequest request) {
 
-		Blogger blogger = bloggerService.findById(1);
+		Blogger blogger = bloggerService.find();
 		System.out.println(blogger.getUserName() + ": " + blogger.getPassword());
 		if (!blogger.getPassword().equals(MD5EncodeUtils.encrypt(oldpwd, "xjc"))) {
 			ResponseUtils.writeText(response, "原密码输入不正确");
