@@ -115,7 +115,7 @@
 
 <div class="data_list">
 	<div class="data_list_title">
-		<!-- <img src="static/images/link_icon.png" /> --> 常用网站收藏
+		<img src="static/images/link_icon.png" /> 常用网站收藏
 	</div>
 	<div class="datas">
 		<ul>
