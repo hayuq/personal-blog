@@ -74,7 +74,7 @@
         content,
       </if>
       <if test="image != null" >
-        image,
+        image
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -106,13 +106,13 @@
         #{content,jdbcType=LONGVARCHAR},
       </if>
       <if test="image != null" >
-        #{image,jdbcType=LONGVARCHAR},
+        #{image,jdbcType=VARCHAR}
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjc.model.Blog" >
     update blog
-    <set >
+    <set>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -136,6 +136,9 @@
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR}
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -215,7 +218,7 @@
   </select>
   
   <!-- 获取博客数 -->
-  <select id="getCount" parameterType="java.util.Map">
+  <select id="getCount" parameterType="java.util.Map" resultType="java.lang.Integer">
   	SELECT COUNT(id) FROM blog
   	<include refid="WhereClause"/>
   </select>
@@ -233,17 +236,17 @@
   	ORDER BY DATE_FORMAT(release_date,'%Y年%m月') DESC
   </select>
   
-  <!-- 查询前5条评论数高的博客 -->
+  <!-- 查询前6条评论数高的博客 -->
    <select id="getTopReview" resultMap="ResultMapWithBLOBs">
   	SELECT * FROM blog
   	ORDER BY review DESC
-  	LIMIT 5
+  	LIMIT 6
   </select>
   
-   <!-- 查询前5条阅读量高的博客 -->
+   <!-- 查询前6条阅读量高的博客 -->
    <select id="getTopReading" resultMap="ResultMapWithBLOBs">
   	SELECT * FROM blog
   	ORDER BY reading DESC
-  	LIMIT 5
+  	LIMIT 6
   </select>
 </mapper>

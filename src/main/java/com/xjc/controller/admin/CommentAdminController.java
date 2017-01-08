@@ -1,5 +1,6 @@
 package com.xjc.controller.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.opensymphony.oscache.util.StringUtil;
 import com.xjc.model.Comment;
 import com.xjc.model.PageBean;
 import com.xjc.service.CommentService;
+import com.xjc.util.Constants;
 import com.xjc.util.PageUtils;
 import com.xjc.util.ResponseUtils;
 
@@ -33,7 +35,7 @@ public class CommentAdminController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer currentPage = StringUtil.isEmpty(page) ? 1 : Integer.parseInt(page);
-		PageBean pageBean = new PageBean(currentPage, 10);
+		PageBean pageBean = new PageBean(currentPage, Constants.BACK_PAGE_SIZE + 1);
 		int pageSize = pageBean.getPageSize();
 		map.put("firstDate", firstDate);
 		map.put("secondDate", secondDate);
@@ -81,6 +83,7 @@ public class CommentAdminController {
 	//评论审核
 	@RequestMapping("/review")
 	public String review(Comment comment,HttpServletResponse response) {
+		comment.setReplyDate(new Date());
 		int result = commentService.review(comment);
 		JSONObject jsonObj = new JSONObject();
 		if(result > 0)

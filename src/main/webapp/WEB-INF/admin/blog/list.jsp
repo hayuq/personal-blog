@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,7 +20,7 @@
 		<div class="tools">
 			<form action="blog/list.do" method="post">
 				<ul class="seachform">
-					<li><label>标题</label><input name="title" type="text" class="scinput" value="${entry.id }"/></li>
+					<li><label>标题</label><input name="title" type="text" class="scinput" value="${entry.title }"/></li>
 					<li><label>发布时间</label><input name="firstDate" type="text" class="scinput" value="${entry.firstDate }" onfocus="WdatePicker()"/></li>
 					<li><label>至</label><input name="secondDate" type="text" value="${entry.secondDate }" class="scinput" onfocus="WdatePicker()"/></li>
 					<li><label>所属类别</label>
@@ -43,6 +43,7 @@
 					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
 					<th>标题</th>
 					<th>所属类别</th>
+					<th>显示图片</th>
 					<th>发布时间</th>
 					<th>操作</th>
 				</tr>
@@ -53,10 +54,11 @@
 						<tr>
 							<td><input name="chk" type="checkbox" value="${blog.id }" /></td>
 							<td>${index.count }</td>
-							<td><a target="_blank" class="tablelink" href="blog/article/${blog.id }.shtml">${blog.title }</a></td>
-							<td><a target="_blank" class="tablelink" href="index.shtml?type=${blog.blogType.typeId }">${blog.blogType.typeName }</a></td>
+							<td><a target="_blank" class="tablelink" href="blog/articles/${blog.id }.shtml">${blog.title }</a></td>
+							<td><a target="_blank" class="tablelink" href="blog.shtml?type=${blog.blogType.typeName }">${blog.blogType.typeName }</a></td>
+							<td><img src="images/cover/${blog.image}" alt="图片" width="45" height="40" style="vertical-align: middle;margin:5px;"></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${blog.releaseDate }" /></td>
-							<td>
+							<td class="op">
 								<a href="blog/toUpdate.do?id=${blog.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
 								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='blog/delete.do?id=${blog.id }'"> <img src="static/images/admin/t03.png" />删除</a>
 							</td>

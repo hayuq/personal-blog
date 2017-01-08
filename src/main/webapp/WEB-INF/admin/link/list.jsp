@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>链接管理</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
+<style>
+	.scbtn{}
+</style>
 </head>
 <body onload="showMsg()">
 	<div class="place">
@@ -38,6 +41,7 @@
 							<td>${link.linkUrl }</td>
 							<td>${link.orderNo }</td>
 							<td>
+								<a href="link/toUpdate.do?id=${link.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
 								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='link/delete.do?id=${link.id }'"> <img src="static/images/admin/t03.png" />删除</a>
 							</td>
 						</tr>

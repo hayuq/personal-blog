@@ -15,10 +15,10 @@ public class BloggerController {
 	@Resource
 	BloggerService bloggerService;
 	
-	@RequestMapping("/info")
+	@RequestMapping
 	public String info(Model model){
 		
-		model.addAttribute("blogger", bloggerService.find();
+		model.addAttribute("blogger", bloggerService.find());
 		return "blogger/info";
 	}
 }

@@ -117,7 +117,7 @@
       <if test="reply != null" >
         reply = #{reply,jdbcType=LONGVARCHAR},
       </if>
-      <if test="commentDate != null" >
+      <if test="replyDate != null" >
         reply_date = #{replyDate,jdbcType=TIMESTAMP},
       </if>
     </set>

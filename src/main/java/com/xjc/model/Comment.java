@@ -15,6 +15,8 @@ public class Comment {
 
     private String userName;
     
+    private Integer userId;
+    
     private User user; //评论的人
 
     private String content;
@@ -85,6 +87,14 @@ public class Comment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {

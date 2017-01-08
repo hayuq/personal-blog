@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加类别</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
-<body>
+<body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -29,6 +29,7 @@
 			</table>
 			<input type="submit" class="scbtn" value="保存"/>
 			<input type="button" class="scbtn" value="返回" onclick="history.back()" />
+			<input type="hidden" id="msg" value="${msg }"/>
 		</form>
 	</div>
 </body>

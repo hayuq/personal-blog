@@ -1,38 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>功能菜单</title>
-<%@include file="/WEB-INF/admin/head.jsp" %>
-<script type="text/javascript">
-	$(function() {
-		//导航切换
-		$(".menuson .header").click(
-				function() {
-					var $parent = $(this).parent();
-					$(".menuson>li.active").not($parent).removeClass("active open").find('.sub-menus').hide();
-					$parent.addClass("active");
-					if (!!$(this).next('.sub-menus').size()) {
-						if ($parent.hasClass("open")) {
-							$parent.removeClass("open").find('.sub-menus').hide();
-						} else {
-							$parent.addClass("open").find('.sub-menus').show();
-						}
-					}
-				});
-
-		$('.title').click(function() {
-			var $ul = $(this).next('ul');
-			$('dd').find('.menuson').slideUp();
-			if ($ul.is(':visible')) {
-				$(this).next('.menuson').slideUp();
-			} else {
-				$(this).next('.menuson').slideDown();
-			}
-		});
-	})
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>功能菜单</title>
+	<%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
 <body style="background: #f0f9fd;">
 	<div class="lefttop">
@@ -61,7 +33,7 @@
 		
 		<dd>
 			<div class="title">
-				<span><img src="static/images/admin/leftico01.png" /></span>文章类别管理</a>
+				<span><img src="static/images/admin/leftico04.png" /></span>文章类别管理</a>
 			</div>
 			<ul class="menuson">
 				<li>
@@ -81,7 +53,7 @@
 
 		<dd>
 			<div class="title">
-				<span><img src="static/images/admin/leftico01.png" /></span>评论管理</a>
+				<span><img src="static/images/admin/leftico02.png" /></span>评论管理</a>
 			</div>
 			<ul class="menuson">
 				<li>
@@ -115,7 +87,21 @@
 		
 		<dd>
 			<div class="title">
-				<span><img src="static/images/admin/leftico01.png" /></span>个人信息管理
+				<span><img src="static/images/admin/leftico03.png" /></span>个人信息管理
+			</div>
+			<ul class="menuson">
+				<li>
+					<div class="header">
+						<cite></cite> <i></i> <a href="blogger/toModifyInfo.do"
+							target="rightFrame">修改个人信息</a>
+					</div>
+				</li>
+			</ul>
+		</dd>
+		
+		<dd>
+			<div class="title">
+				<span><img src="static/images/admin/leftico01.png" /></span>系统管理</a>
 			</div>
 			<ul class="menuson">
 				<li>
@@ -126,25 +112,12 @@
 				</li>
 				<li>
 					<div class="header">
-						<cite></cite> <i></i> <a href="blogger/toModifyInfo.do"
-							target="rightFrame">修改个人信息</a>
+						<cite></cite> <i></i> <a href="/druid/index.html"
+							target="rightFrame">性能监控</a>
 					</div>
 				</li>
 			</ul>
 		</dd>
-		<!-- <dd>
-			<div class="title">
-				<span><img src="static/images/admin/leftico01.png" /></span>博客配置</a>
-			</div>
-			<ul class="menuson">
-				<li>
-					<div class="header">
-						<cite></cite> <i></i> <a href="blogInfo/modify.do"
-							target="rightFrame">博客基本信息配置</a>
-					</div>
-				</li>
-			</ul>
-		</dd> -->
 	</dl>
 </body>
 </html>

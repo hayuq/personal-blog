@@ -28,9 +28,29 @@ public class LinkAdminController {
 	}
 	
 	@RequestMapping("/add")
-	public String add(Link link) {
-		linkService.add(link);
-		return "redirect:/link/list.do";
+	public String add(Link link,Model model) {
+		int result = linkService.add(link);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
+	}
+	
+	@RequestMapping("/toUpdate")
+	public String toUpdate(Integer id,Model model) {
+		model.addAttribute("link", linkService.findById(id));
+		return "link/update";
+	}
+	
+	@RequestMapping("/update")
+	public String update(Link link,Model model) {
+		int result = linkService.update(link);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
 	}
 	
 	@RequestMapping("/delete")

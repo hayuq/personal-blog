@@ -19,6 +19,7 @@ import com.xjc.model.BlogType;
 import com.xjc.model.PageBean;
 import com.xjc.service.BlogService;
 import com.xjc.service.BlogTypeService;
+import com.xjc.util.Constants;
 import com.xjc.util.PageUtils;
 import com.xjc.util.ResponseUtils;
 
@@ -37,22 +38,28 @@ public class BlogTypeAdminController {
 
 	@RequestMapping("/list")
 	public String list(String page, Model model, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<String, Object>();
 		Integer currentPage = StringUtil.isEmpty(page) ? 1 : Integer.parseInt(page);
-		PageBean pageBean = new PageBean(currentPage, 10);
+		PageBean pageBean = new PageBean(currentPage, Constants.BACK_PAGE_SIZE + 3);
 		int pageSize = pageBean.getPageSize();
 
-		int totalCount = blogTypeService.getTypeList(map).size();
+		int totalCount = blogTypeService.getTypeList(params).size();
 		pageBean.setTotalCount(totalCount);
-		map.put("start", pageBean.getStart());
-		map.put("size", pageSize);
-		List<BlogType> blogTypeList = blogTypeService.getTypeList(map);
+		params.put("start", pageBean.getStart());
+		params.put("size", pageSize);
+		List<BlogType> blogTypeList = blogTypeService.getTypeList(params);
+		blogTypeList.forEach(blogType -> {
+			Map<String, Object> types = new HashMap<String, Object>();
+			types.put("typeId", blogType.getTypeId());
+			Integer blogCount = blogService.getCount(types);
+			blogType.setBlogCount(blogCount);
+		});
 		model.addAttribute("pagination", pageBean);
 
 		String targetUrl = request.getContextPath() + "/blogType/list.do";
 		String pageCode = PageUtils.genPagination(targetUrl, totalCount, currentPage, pageSize, "");
 		model.addAttribute("pageCode", pageCode);
-		model.addAttribute("entry", map);
+		model.addAttribute("entry", params);
 		model.addAttribute("blogTypeList", blogTypeList);
 		return "blogType/list";
 	}
@@ -69,15 +76,23 @@ public class BlogTypeAdminController {
 	}
 
 	@RequestMapping("/add")
-	public String add(BlogType blogType) {
-		blogTypeService.add(blogType);
-		return "redirect:/blogType/list.do";
+	public String add(BlogType blogType,Model model) {
+		int result = blogTypeService.add(blogType);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
 	}
 	
 	@RequestMapping("/update")
-	public String update(BlogType blogType) {
-		blogTypeService.update(blogType);
-		return "redirect:/blogType/list.do";
+	public String update(BlogType blogType,Model model) {
+		int result = blogTypeService.update(blogType);
+		if (result > 0)	
+			model.addAttribute("msg", "保存成功");
+		else
+			model.addAttribute("msg", "保存失败");
+		return null;
 	}
 	
 	@RequestMapping("/search")

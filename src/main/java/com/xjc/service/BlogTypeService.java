@@ -18,4 +18,6 @@ public interface BlogTypeService {
 	int add(BlogType blogType);
 	
 	BlogType findById(Integer id);
+
+	Integer getIdByName(String typeName);
 }

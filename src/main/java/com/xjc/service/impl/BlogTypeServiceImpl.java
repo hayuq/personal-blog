@@ -18,7 +18,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	BlogTypeMapper blogTypeMapper;
 	
 	public List<BlogType> getTypeList() {
-		return blogTypeMapper.getAllTypeList();
+		return blogTypeMapper.getTypeList(null);
 	}
 
 	public List<BlogType> getTypeList(Map<String, Object> map) {
@@ -39,6 +39,10 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 
 	public BlogType findById(Integer id) {
 		return blogTypeMapper.selectByPrimaryKey(id);
+	}
+
+	public Integer getIdByName(String typeName) {
+		return blogTypeMapper.getIdByName(typeName);
 	}
 
 }

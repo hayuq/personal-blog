@@ -1,68 +1,17 @@
-<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" contentType="text/html; charset=UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<base href="<%=basePath%>"/>
-<meta name="keywords" content="个人博客,学习笔记">
-<meta name="description" content="Promising的博客，一位程序员的个人博客，用来记录学习和生活中的大小事。">
+<%@page import="com.xjc.util.Constants"%>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"
+	contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
+<meta name="keywords" content="个人博客,学习笔记，生活随记">
+<meta name="description" content="Promising的博客，一位程序员的个人博客，用来记录学习和生活中的大小事。包括Java，.NET，Android，以及前端知识等。">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-<link href="favicon.ico" rel="SHORTCUT ICON">
-<link rel="stylesheet" href="static/bootstrap3/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/bootstrap3/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="static/css/blog.css">
-<script type="text/javascript" src="static/bootstrap3/js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="static/bootstrap3/js/bootstrap.min.js"></script>
-
-<!-- ueditor代码高亮 -->
-<link href="static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" type="text/css" />  
-<script type="text/javascript" src="static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>  
-<script type="text/javascript">      
-	SyntaxHighlighter.all();       
-</script>
-<script type="text/javascript">
-	
-	function checkData(){
-		var q = $.trim($("#q").val());
-		if(q == ""){
-			alert("请输入您要查询的关键字！");
-			return false;
-		}
-		return true;
-	}
-	
-	function search(){
-		if(checkData()){
-			$.post("search.shtml",{"q":$("#q").val()},function(result){
-				document.body.innerHTML = result
-			})
-		}
-	}
-	
-	//回顶部
-	  $(function(){
-		  $(window).scroll(function() {
-				var scroll_top = $(document).scrollTop();
-				if (scroll_top >= 100) {
-					$(".return_top").fadeIn();
-				} else {
-					$(".return_top").fadeOut();
-				}
-			});
-			$(".return_top").click(function() {
-				$("html,body").stop(true).animate({
-					scrollTop : "0"
-				}, 600);
-			});
-	  });
-</script>
+<%@include file="/WEB-INF/front/head.jsp" %>
 <div class="row banner">
-	<div class="col-md-4" style="float:left">
+	<div class="col-md-4" style="float: left">
 		<h3>${blogger.nickName }的博客</h3>
 		<p>${blogger.signature }</p>
 	</div>
-	<div class="col-md-8" style="padding-top:20px;float: right;">
+	<div class="col-md-8" style="padding-top: 20px; float: right;">
 		<iframe style="float: right;" width="300" scrolling="no" height="60"
 			frameborder="0" allowtransparency="true"
 			src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=5"></iframe>
@@ -71,34 +20,35 @@
 <div class="row">
 	<div class="col-md-12" style="padding-top: 10px">
 		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="index.shtml"><font color="#000">首页</font></a>
-		    </div>
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/"><font color="#000">首页</font></a>
+				</div>
 
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-		      <ul class="nav navbar-nav navbar" style="font-size:16px;">
-		        <li><a href="blogger/info.shtml"><font color="#000">关于我</font></a></li>
-		        <li><a href="blogger/info.shtml"><font color="#000">生活点滴</font></a></li>
-		        <li><a href="index.shtml"><font color="#000">程序相关</font></a></li>
-		        <li><a href="index.shtml"><font color="#000">互联网络</font></a></li>
-		       <!--  <li><a href="blogger/info.shtml"><font color="#000">留言板</font></a></li> -->
-		      </ul>
-		     <form action="search.shtml" class="navbar-form navbar-right" role="search" method="post" onsubmit="return checkData()">
-		        <div class="form-group" >
-		          <input type="text" id="q" name="q" class="form-control" placeholder="请输入关键字搜索...">
-		        </div>
-		        <input type="submit" class="btn btn-default" value="搜索"/>
-		      </form>
-		    </div>
-		  </div>
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar" style="font-size: 16px;">
+						<li><a href="blogger.shtml"><font color="#000">关于我</font></a></li>
+						<li><a href="life.shtml"><font color="#000"><%=Constants.LIFE_NAME %></font></a></li>
+						<li><a href="admin/login.do" target="_blank"><font color="#000">管理博客</font></a></li>
+						<%-- <li><a href="blog/about.shtml"><font color="#000">关于博客</font></a></li> --%>
+					</ul>
+					<%-- <form action="search.shtml" class="navbar-form navbar-right" role="search" method="post" onsubmit="return checkData()">
+				        <div class="form-group" >
+				          <input type="text" id="q" name="q" class="form-control" placeholder="请输入关键字搜索...">
+				        </div>
+				        <input type="submit" class="btn btn-default" value="搜索"/>
+				    </form> --%>
+				</div>
+			</div>
 		</nav>
 	</div>
 </div>

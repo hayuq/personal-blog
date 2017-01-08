@@ -21,4 +21,6 @@ public interface BlogTypeMapper {
     List<BlogType> getAllTypeList();
     
     List<BlogType> getTypeList(Map<String, Object> map);
+    
+    Integer getIdByName(String typeName);
 }

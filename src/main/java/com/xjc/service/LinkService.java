@@ -8,7 +8,11 @@ public interface LinkService {
 
 	public List<Link> getLinkList();
 	
+	Link findById(Integer id);
+	
 	int add(Link link);
+	
+	int update(Link link);
 	
 	int delete(Integer id);
 }

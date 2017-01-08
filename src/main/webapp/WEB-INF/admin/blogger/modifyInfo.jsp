@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>修改个人信息</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
-<script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="static/ueditor/ueditor.all.min.js"> </script>
-<script type="text/javascript" charset="utf-8" src="static/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body onload="showMsg()">
 	<div class="place">
@@ -41,17 +38,7 @@
 					<td style="width:50px">个人简介</td>
 					<td>
 						<textarea id="editor" name="profile" id="profile">${blogger.profile }</textarea>
-							<script type="text/javascript">
-								//实例化编辑器
-								var editor = UE.getEditor('editor',{
-									initialFrameWidth: 900, //初始化编辑器宽度,默认1000
-							        initialFrameHeight: 300, /* 初始化编辑器宽度,默认320 */
-							        elementPathEnabled : false, //是否启用元素路径，默认是显示
-							        autoHeightEnabled: false, //是否自动长高,默认true
-							        scaleEnabled: false, //是否可以拉伸长高,默认true
-							        allowDivTransToP: false
-								});
-							</script>
+						<script type="text/javascript" src="static/js/ueditor.js"></script>
 					</td>
 				</tr>
 			</table>
@@ -59,25 +46,5 @@
 			<input type="button" class="scbtn" value="返回" onclick="history.back()" />
 		</form>
 	</div>
-<script type="text/javascript">
-	function checkInfo(){
-		var nickName = $("#nickName").val();
-		var sign = $("#sign").val();
-		var content = editor.getContent();
-		if(nickName.trim() == ''){
-			alert("请填写昵称");
-			return false;
-		}
-		if(sign.trim() == ''){
-			alert("请填写签名");
-			return false;
-		}
-		if(content.trim() == ''){
-			alert("个人简介不允许为空");
-			return false;
-		}
-		return true;
-	}
-</script>
 </body>
 </html>

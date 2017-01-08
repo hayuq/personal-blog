@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjc.model.Blogger;
 import com.xjc.service.BloggerService;
+import com.xjc.util.Constants;
 import com.xjc.util.MD5EncodeUtils;
 import com.xjc.util.ResponseUtils;
 
@@ -29,7 +30,7 @@ public class SystemController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request){
-		request.getSession(false).invalidate();
+		request.getSession(false).removeAttribute(Constants.CURRENT_USER);;
 		return "login";
 	}
 	
@@ -48,7 +49,7 @@ public class SystemController {
 			ResponseUtils.writeText(response, "密码错误");
 			return null;
 		}
-		request.getSession().setAttribute("currentUser", blogger);
+		request.getSession().setAttribute(Constants.CURRENT_USER, blogger);
 		return null;
 	}
 	

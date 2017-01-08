@@ -38,43 +38,5 @@
 			<span id="errorInfo" style="font-size:16px"></span>
 		</form>
 	</div>
-<script type="text/javascript">
-	function savePwd(){
-		var newpwd = $("#newpwd").val();
-		var repwd = $("#repwd").val();
-		var oldpwd = $("#oldpwd").val();
-		if(oldpwd.trim() == ''){
-			$("#errorInfo").css("color","red");
-			$("#errorInfo").html("请输入原密码");
-			return;
-		}
-		if(newpwd.trim() == ''){
-			$("#errorInfo").css("color","red");
-			$("#errorInfo").html("请输入新密码");
-			return;
-		}
-		if(repwd.trim() == ''){
-			$("#errorInfo").css("color","red");
-			$("#errorInfo").html("请再次输入新密码");
-			return;
-		}
-		var params = {
-			"id" : $("#id").val(),
-			"newpwd" : newpwd,
-			"oldpwd" : oldpwd,
-			"repwd" : repwd
-		};
-		$.post("blogger/modifyPassword.do",params,function(result){
-			if(result == '修改成功'){
-				$("#errorInfo").css("color","black");
-				$("#errorInfo").html("修改成功,下次登录时生效");
-			}
-			else{				
-				$("#errorInfo").css("color","red");
-				$("#errorInfo").html(result);
-			}
-		});
-	}
-</script>
 </body>
 </html>

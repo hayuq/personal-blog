@@ -54,8 +54,9 @@ public class CommentController {
 				userMapper.insertSelective(user);
 			}
 			if (comment.getId() == null) {
-				comment.setUser(user);
 				comment.setBlogId(blogId);
+				comment.setUserId(user.getId());
+				comment.setUserName(userName);
 				comment.setContent(StringEscapeUtils.escapeHtml4(comment.getContent()));
 				result = commentService.add(comment);
 				// 博客的评论次数加1

@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opensymphony.oscache.util.StringUtil;
 import com.xjc.lucene.BlogIndex;
 import com.xjc.model.Blog;
+import com.xjc.model.BlogType;
 import com.xjc.model.PageBean;
 import com.xjc.service.BlogService;
 import com.xjc.service.BlogTypeService;
 import com.xjc.service.CommentService;
+import com.xjc.util.Constants;
 import com.xjc.util.PageUtils;
 
 /**
@@ -52,7 +54,7 @@ public class BlogAdminController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer currentPage = StringUtil.isEmpty(page) ? 1 : Integer.parseInt(page);
-		PageBean pageBean = new PageBean(currentPage, 10);
+		PageBean pageBean = new PageBean(currentPage, Constants.DEFAULT_PAGE_SIZE - 1);
 		int pageSize = pageBean.getPageSize();
 		map.put("typeId", typeId);
 		map.put("title", title);
@@ -65,6 +67,9 @@ public class BlogAdminController {
 		map.put("size", pageSize);
 		List<Blog> blogList = blogService.getBlogList(map);
 		model.addAttribute("pagination", pageBean);
+		
+		List<BlogType> blogTypeList = blogTypeService.getTypeList();
+		model.addAttribute("blogTypeList",blogTypeList);
 
 		StringBuffer param = new StringBuffer(); // 分页查询参数
 		param.append(StringUtil.isEmpty(title) ? "" : "title=" + title);
@@ -89,7 +94,9 @@ public class BlogAdminController {
 	@RequestMapping("/toUpdate")
 	public String toUpdate(Integer id, Model model) {
 		model.addAttribute("blogTypeList", blogTypeService.getTypeList());
-		model.addAttribute("blog", blogService.findById(id));
+		Blog blog = blogService.findById(id);
+		model.addAttribute("blog", blog);
+		model.addAttribute("typeId",blog.getBlogType().getTypeId());
 		return "blog/update";
 	}
 
@@ -108,11 +115,6 @@ public class BlogAdminController {
 			handleFileUpload(file, imageUrl,request);
 			blog.setImage(imageUrl);
 		}
-		String content = blog.getContent();
-		if (content.length() > 300)
-			blog.setSummary(content.substring(0, 300));
-		else
-			blog.setSummary(content);
 		int result = blogService.add(blog);
 		//添加博客索引
 		blogIndex.createIndex(blog);
@@ -138,11 +140,6 @@ public class BlogAdminController {
 			handleFileUpload(file,imageUrl,request);
 			blog.setImage(imageUrl);
 		}
-		String content = blog.getContent();
-		if (content.length() > 300)
-			blog.setSummary(content.substring(0, 300));
-		else
-			blog.setSummary(content);
 		int result = blogService.update(blog);
 		//更新博客索引
 		blogIndex.updateIndex(blog);
@@ -175,7 +172,7 @@ public class BlogAdminController {
 		try {
 			// 获取输入流
 			is = file.getInputStream();
-			String filePath = request.getServletContext().getRealPath("images/cover/") + imageUrl;
+			String filePath = "C:/uploadFiles/cover/" + imageUrl;
 			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 			//判断上传目录是否存在
 			if (!dir.exists()) {

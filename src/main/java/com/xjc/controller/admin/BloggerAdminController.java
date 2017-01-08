@@ -35,7 +35,7 @@ public class BloggerAdminController {
 
 	@RequestMapping("/toModifyInfo")
 	public String toModifyInfo(Model model) {
-		model.addAttribute("blogger", bloggerService.find();
+		model.addAttribute("blogger", bloggerService.find());
 		return "blogger/modifyInfo";
 	}
 
@@ -92,7 +92,7 @@ public class BloggerAdminController {
 		try {
 			// 获取输入流
 			is = file.getInputStream();
-			String filePath = request.getServletContext().getRealPath("images/avatar/") + imageUrl;
+			String filePath = "C:/uploadFiles/avatar/" + imageUrl;
 			File dir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 			// 判断上传目录是否存在
 			if (!dir.exists()) {

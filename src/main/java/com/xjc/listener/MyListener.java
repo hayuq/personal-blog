@@ -55,7 +55,7 @@ public class MyListener implements ServletContextListener,ApplicationContextAwar
 		application.setAttribute("dateRankList", blogService.getByDate());
 		application.setAttribute("readingRankList", blogService.getTopReading());
 		application.setAttribute("reviewRankList", blogService.getTopReview());
-		application.setAttribute("blogger", bloggerService.findById(1));
+		application.setAttribute("blogger", bloggerService.find());
 		application.setAttribute("linkList", linkService.getLinkList());
     }
 

@@ -27,7 +27,9 @@ public class Blog {
 	
 	private Integer count; //博客数量，非博客实际属性
 	
-	private String releaseDateStr;//日期字符串，只包含年月
+	private String releaseDateStr;//日期字符串，非博客实际属性
+	
+	private String typeName;//博客类型名称，非博客实际属性
 
     public BlogType getBlogType() {
 		return blogType;
@@ -131,5 +133,13 @@ public class Blog {
 
 	public void setReleaseDateStr(String releaseDateStr) {
 		this.releaseDateStr = releaseDateStr;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 }
