@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"
 	trimDirectiveWhitespaces="true"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>搜索结果 - Promising的博客</title>
+	<title>搜索'${q }'的结果 - ${blogger.nickName }的博客</title>
+	<%@include file="/WEB-INF/front/head.jspf" %>
 </head>
 <body>
 	<div class="container">
@@ -39,18 +37,8 @@
 												<p>
 													<span>${blog.summary }</span>
 												</p>
-												<%-- <p>
-													<span class="reading">浏览(<a
-														href="javascript:void(0)">${blog.reading}</a>)
-													</span> <span class="review">评论(<a
-														href="blog/articles/${blog.id}.shtml#comment">${blog.review}</a>)
-													</span> <span class="readfull"> <a title="阅读全文"
-														href="javascript:void(0)"
-														onclick="window.location='blog/articles/${blog.id}.shtml'">阅读全文</a>
-													</span>
-												</p> --%>
 											<span class="link"><a href="blog/articles/${blog.id}.shtml" target="_blank">
-											http://www.juncheng1994.cn/blog/articles/${blog.id}.shtml</a></span>
+											${basePath }blog/articles/${blog.id}.shtml</a></span>
 											</div>
 											<div class="sepline"></div></li>
 									</c:forEach>

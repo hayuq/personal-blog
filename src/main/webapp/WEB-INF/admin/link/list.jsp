@@ -5,9 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>链接管理</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
-<style>
-	.scbtn{}
-</style>
 </head>
 <body onload="showMsg()">
 	<div class="place">
@@ -23,8 +20,9 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input type="checkbox" onclick="selectAll('chk',this)" /><input type="hidden" id="msg"  value="${msg }"/></th>
-					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
+					<th><input type="checkbox" onclick="selectAll('chk',this)" />
+					<input type="hidden" id="msg"  value="${msg }"/></th>
+					<th>序号</th>
 					<th>链接名称</th>
 					<th>链接地址</th>
 					<th>显示顺序</th>
@@ -41,8 +39,13 @@
 							<td>${link.linkUrl }</td>
 							<td>${link.orderNo }</td>
 							<td>
-								<a href="link/toUpdate.do?id=${link.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
-								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='link/delete.do?id=${link.id }'"> <img src="static/images/admin/t03.png" />删除</a>
+								<a href="link/toUpdate.do?id=${link.id }" target="_self" class="tablelink">
+								    <img class="detail" src="static/images/admin/ico06.png" />修改
+								</a> 
+								<a href="javascript:void(0)" class="tablelink" onclick="confirm('确定删除该条数据吗？', 
+								    function() { window.location.href='link/delete.do?id=${link.id }'});"> 
+								    <img src="static/images/admin/t03.png" />删除
+								</a>
 							</td>
 						</tr>
 					</c:forEach>

@@ -3,7 +3,8 @@
 body{padding-top:10px;padding-bottom:40px;height:22px;background-color:#f1fafa;color:#333;letter-spacing:.6px;font-size:13px;font-family:微软雅黑;line-height:22px;}
 .block{display:block;}
 .clear{clear:both;}
-a:hover{outline:none;underline:none;text-decoration:none;}
+.ellipsis {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; word-break: keep-all;}
+a:link, a:visited, a:hover, a:active {outline:none;underline:none;text-decoration:none;}
 
 /*top*/
 .banner{margin:0 auto;border-radius:5px;background:url(../images/banner.jpeg);background-size:cover;}
@@ -13,7 +14,8 @@ a:hover{outline:none;underline:none;text-decoration:none;}
 /*list*/
 .data_list{margin-top:0;margin-bottom:10px;padding:10px;border:1px solid #e5e5e5;background-color:#fdfdfd;}
 .data_list .data_list_title{padding-top:5px;padding-bottom:10px;border-bottom:1px solid #e5e5e5;font-weight:700;font-size:15px;}
-.data_list .data_list_title img{margin-top:-2px;margin-right:3px;vertical-align:middle;}
+.data_list .data_list_title img{margin-top:-2px;margin-right:3px;vertical-align:middle;max-width:100%;height:auto;}
+.search_form {margin-top: 8px;}
 .data_list .user_image{text-align:center;}
 .data_list .user_image img{padding-top:10px;width:150px;height:150px;}
 .data_list .nickName,.data_list .userSign{text-align:center;}
@@ -35,22 +37,23 @@ a:hover{outline:none;underline:none;text-decoration:none;}
 .datas .content {float: left;width: 620px;}
 @media only screen and (max-width: 481px) {.datas{width:100%;} .time,.type{clear:both;color:#929292;} .datas .img{display:none;} .datas .content { width: 98%; display: block; margin: 5px; } }
 @media only screen and (max-width: 769px) {.datas{width:100%;} .time,.type{clear:both;color:#929292;} .datas .content { width: 98%; display: block; margin: 5px; }}
-.img{float:left;margin-right:5px;padding:2px;border:1px solid #f4f2f2;}
-.type{background:url(../images/class.png) no-repeat left center;}
-.time,.type{padding-left:20px;color:#929292;}
-.time{float:right;background:url(../images/time.png) no-repeat left center;}
+.img{float:left;margin-right:5px;padding:2px;border:1px solid #f4f2f2; border-radius:3px;}
+.time,.type{color:#929292;}
+/* .type{background:url(../images/class.png) no-repeat left center;}
+.time{float:right;background:url(../images/time.png) no-repeat left center;} */
+.time{float:right;}
 .datas .info{margin:12px 0 5px;clear:both;line-height:25px;height:25px;}
-.reading{margin-right:20px;background:url(../images/view.png) no-repeat left center;}
-.reading,.review{padding-left:20px;color:#929292;}
-.review{background:url(../images/review.png) no-repeat left center;}
-.readfull a{float:right;display:block;padding:0 5px;border:1px solid #abadb3;border-radius:3px;background:#f90;color:#fff;}
+.reading,.review{margin-right:20px;color:#929292;}
+/* .reading{margin-right:20px;background:url(../images/view.png) no-repeat left center;}
+.review{background:url(../images/review.png) no-repeat left center;} */
+.readfull a{float:right;display:block;padding:1px 8px;border:0px solid #abadb3;border-radius:1px;background:#0099cc;color:#fff;}
 .readfull a:active,.readfull a:hover,.readfull a:link,.readfull a:visited{outline:none;color:#fff;text-decoration:none;}
 
 /*detail*/
 .data_list .blog_title{margin-top:20px;margin-bottom:10px;text-align:center;font-size:21px;}
 .data_list .blog_info{margin-bottom:3px;padding-top:10px;text-align:center;}
 .data_list .blog_content,.data_list .blog_keyWord{margin-top:10px;padding-bottom:5px;}
-.bshare-custom{float:right;padding-bottom:10px;}
+.bdsharebuttonbox{float:right;padding-bottom:10px;}
 .data_list .blog_keyWord{padding-left:10px;}
 .data_list .blog_keyWord a{color:#000;font-style:italic;}
 .data_list .blog_lastAndNextPage,.data_list .commentDatas{padding:10px;}
@@ -62,7 +65,7 @@ a:hover{outline:none;underline:none;text-decoration:none;}
 .data_list .publish_comment p{margin-left:20px;}
 .data_list .publish_comment .cbox{padding-left:60px;}
 .data_list .publish_comment .area-wrap{padding:3px;}
-.data_list .comment-area{line-height:20px;padding:3px;resize:none;overflow-x: hidden;overflow-y: auto;height:80px;width:100%;}
+.data_list .comment-area{line-height:20px; resize:none; overflow-x: hidden; overflow-y: auto; height:90px;width:100%;}
 .data_list .publish_comment .bar-wrap{margin-top:0;border:0;}
 .data_list .verCode{float:left;padding:3px;}
 .data_list .verCode .errorInfo{margin-left: 20px; color: #f00;}

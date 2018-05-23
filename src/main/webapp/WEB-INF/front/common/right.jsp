@@ -1,128 +1,129 @@
-<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"
-	trimDirectiveWhitespaces="true"%>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="data_list">
-	<div class="easyui-calendar" style="margin: 0; width:240px; height:240px; border:none;"></div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/search_icon.png" />文章搜索
+<aside>
+	<div class="data_list">
+		<div class="easyui-calendar" style="margin: 0 auto; width:240px; height:240px; border:none;"></div>
 	</div>
-	<div>
-		<form action="search.shtml" role="search" method="post" onsubmit="return checkData()">
-			<div class="form-group">
-				<input type="text" id="q" name="q" class="form-control"
-					style="width:76%;float:left;margin-right:2px;" placeholder="请输入关键字">
-			</div>
-			<input type="submit" class="btn btn-info" value="搜索"/>
-		</form>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-search"></i> 文章搜索
+		</div>
+		<div class="search_form">
+			<form class="from-inline" action="search.shtml" role="search" onsubmit="return checkData()">
+				<div class="input-group">
+					<input type="text" id="q" name="q" class="form-control" placeholder="请输入关键字">
+					<span class="input-group-btn">
+					 <button class="btn btn-info" type="submit">搜索</button>
+					</span>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/user_icon.png" /> 个人资料
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-user"></i> 个人资料
+		</div>
+		<div class="user_image">
+			<img src="images/avatar/${blogger.imageUrl }" alt="头像" />
+		</div>
+		<div class="nickName">${blogger.nickName }</div>
+		<div class="userSign">(${blogger.signature })</div>
 	</div>
-	<div class="user_image">
-		<img src="images/avatar/${blogger.imageUrl }" alt="" width="100px"
-			height="100px" />
-	</div>
-	<div class="nickName">${blogger.nickName }</div>
-	<div class="userSign">(${blogger.signature })</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/byType_icon.png" />
-		文章分类（${blogTypeList.size() }）
-	</div>
-	<div class="datas">
-		<ul>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-list"></i>
+			文章分类（${blogTypeList.size() }）
+		</div>
+		<div class="datas">
+			<ul>
 			<c:forEach var="blogType" items="${blogTypeList }" varStatus="status">
-				<c:choose>
-					<c:when test="${status.index < 8 }">
-						<li><span> <a
-								href="blog.shtml?type=${blogType.typeName}">${blogType.typeName }</a><font
-								color="#337ab7">(${blogType.blogCount })</font>
-						</span></li>
-					</c:when>
-					<c:otherwise>
-
-						<li class="otherType" style="display: none"><span> <a
-								href="blog.shtml?type=${blogType.typeName}">${blogType.typeName }</a><font
-								color="#337ab7">(${blogType.blogCount })</font>
-						</span></li>
-					</c:otherwise>
-				</c:choose>
+			<c:choose>
+				<c:when test="${status.index < 8 }">
+				<li>
+                    <a href="blog.shtml?cat=${blogType.typeId}">${blogType.typeName }</a>
+                    <font color="#337ab7">(${blogType.blogCount })</font>
+				</li>
+				</c:when>
+				<c:otherwise>
+				<li class="otherType" style="display: none">
+				    <a href="blog.shtml?cat=${blogType.typeId}">${blogType.typeName }</a>
+				    <font color="#337ab7">(${blogType.blogCount })</font>
+				</li>
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
-			<li><span> <a href="javascript:void(0)"
-					onclick="showOtherType()" id="showOtherType">更多...</a>
-			</span></li>
-		</ul>
+				<li>
+                    <a href="javascript:void(0)" onclick="showOtherType()" id="showOtherType">更多...</a>
+				</li>
+			</ul>
+		</div>
 	</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/byDate_icon.png" /> 文章存档
-	</div>
-	<div class="datas">
-		<ul>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-book"></i> 文章存档
+		</div>
+		<div class="datas">
+			<ul>
 			<c:forEach var="blog" items="${dateRankList }">
-				<li><span> <a
-						href="blog.shtml?month=${blog.releaseDateStr }">${blog.releaseDateStr }</a><font
-						color="#337ab7">(${blog.count })</font>
-				</span></li>
+				<li>
+			        <a href="blog.shtml?month=<fmt:formatDate value="${blog.releaseDate }" type="date" pattern="yyyyMM"/>">${blog.releaseDateStr }</a>
+			        <font color="#337ab7">(${blog.count })</font>
+			    </li>
 			</c:forEach>
-		</ul>
+			</ul>
+		</div>
 	</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/list_icon.png" /> 热门文章
-	</div>
-	<div class="datas">
-		<ul>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-fire"></i> 热门文章
+		</div>
+		<div class="datas">
+			<ul>
 			<c:forEach var="blog" items="${readingRankList }" varStatus="index">
-				<li class="rank"><span class="number bgcolor${index.count }">${index.count }</span>
-					<span> <a href="blog/articles/${blog.id }.shtml"
-						title="${blog.title }">${blog.title }</a>
-				</span></li>
+				<li class="ellipsis">
+				    <span class="number bgcolor${index.count }">${index.count }</span>
+				    <a href="blog/articles/${blog.id }.shtml" title="${blog.title }">${blog.title }</a>
+				</li>
 			</c:forEach>
-		</ul>
+			</ul>
+		</div>
 	</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/comment_icon.png" /> 热评文章
-	</div>
-	<div class="datas">
-		<ul>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-sort-by-attributes-alt"></i> 热评文章
+		</div>
+		<div class="datas">
+			<ul>
 			<c:forEach var="blog" items="${reviewRankList }" varStatus="index">
-				<li class="rank"><span class="number bgcolor${index.count }">${index.count }</span>
-					<span> <a href="blog/articles/${blog.id }.shtml"
-						title="${blog.title }">${blog.title }</a>
-				</span></li>
+				<li class="ellipsis">
+				    <span class="number bgcolor${index.count }">${index.count }</span>
+				    <a href="blog/articles/${blog.id }.shtml" title="${blog.title }">${blog.title }</a>
+			    </li>
 			</c:forEach>
-		</ul>
+			</ul>
+		</div>
 	</div>
-</div>
-
-<div class="data_list">
-	<div class="data_list_title">
-		<img src="static/images/link_icon.png" /> 常用网站收藏
-	</div>
-	<div class="datas">
-		<ul>
+	
+	<div class="data_list">
+		<div class="data_list_title">
+			<i class="glyphicon glyphicon-link"></i> 常用网站收藏
+		</div>
+		<div class="datas">
+			<ul>
 			<c:forEach var="link" items="${linkList }">
-				<li><span><a href="http://${link.linkUrl }"
-						target="_blank">${link.linkName }</a></span></li>
+				<li>
+	    		     <a href="http://${link.linkUrl }" target="_blank">${link.linkName }</a>
+		        </li>
 			</c:forEach>
-		</ul>
+			</ul>
+		</div>
 	</div>
-</div>
+</aside>

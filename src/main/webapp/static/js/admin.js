@@ -1,10 +1,10 @@
-var _hmt = _hmt || [];
+/*var _hmt = _hmt || [];
 (function() {
 	var hm = document.createElement("script");
 	hm.src = "https://hm.baidu.com/hm.js?52aab7c4b6078350eff50efdb81f030a";
 	var s = document.getElementsByTagName("script")[0];
 	s.parentNode.insertBefore(hm, s);
-})();
+})();*/
 
 $(function() {
 	$(".select").uedSelect({
@@ -13,52 +13,32 @@ $(function() {
 	$('.tablelist tbody tr:odd').addClass('odd');
 });
 
-//登录页面样式
-$(function() {
-	$('.loginbox').css({
-		'position' : 'absolute',
-		'left' : ($(window).width() - 350) / 2,
-		'top' : ($(window).height() - 373) / 2
-	});
-	$(window).resize(function() {
-		$('.loginbox').css({
-			'position' : 'absolute',
-			'left' : ($(window).width() - 350) / 2,
-			'top' : ($(window).height() - 373) / 2
-		});
-	})
-});
-
-function login(){
-	var username = $("#username").val();
-	var password = $("#password").val();
-	if(username.replace(/\s+/g,"") == ""){
-		alert("请输入用户名");
-		return;
-	}
-	if(password.replace(/\s+/g,"") == ""){
-		alert("请输入密码");
-		return;
-	}
-	$.post("admin/userLogin.do",{"username":username,"password":password},function(result){
-		if(result){
-			alert(result);
-			return;
-		}
-		window.location.href="admin/index.do";
-	});
+//重写alert
+window.alert = function(msg, options) {
+	var _default = {icon: 0};
+	$.extend(_default, options);
+	layer.msg(msg, _default);
 }
 
-function reset(){
-	$("#username").val('');
-	$("#password").val('');
+//重写confirm
+window.confirm = function(msg, callback) {
+	layer.confirm(msg, {
+		title: '提示',  
+		shade: 0.1,
+		skin: 'layui-layer-molv',
+		icon: 3,
+		btn: ['确定','取消']
+	}, function() { //确定事件
+		(typeof(callback) === "function") && callback("ok");
+	});
 }
 
 $(function() {
 	//左侧功能菜单导航切换
 	$(".menuson .header").click(function() {
 		var $parent = $(this).parent();
-		$(".menuson>li.active").not($parent).removeClass("active open")
+		$(".menuson>li.active").not($parent)
+			.removeClass("active open")
 			.find('.sub-menus').hide();
 		$parent.addClass("active");
 		if (!!$(this).next('.sub-menus').size()) {
@@ -119,8 +99,7 @@ function previewImg(file) {
 //显示提示信息
 function showMsg() {
 	var msg = $("#msg").val();
-	if (msg)
-		alert(msg);
+	if (msg) alert(msg);
 }
 
 //修改密码
@@ -179,14 +158,16 @@ function checkInfo() {
 	return true;
 }
 
-function reply(){
+function reply() {
 	var id = $("#id").val();
 	var isPass = $("#isPass").val();
 	var reply = $("#review").val();
-	$.post("comment/review.do",{"id":id,"isPass":isPass,"reply":reply},function(result){
-		if(result.success)
-			alert("提交成功");
-		else
-			alert("提交失败");
+	var data = {
+		"id": id,
+		"isPass" : isPass,
+		"reply": reply
+	};
+	$.post("comment/audit.do", data, function(result) {
+		alert(result.success ? "提交成功" : "提交失败");
 	});
 }

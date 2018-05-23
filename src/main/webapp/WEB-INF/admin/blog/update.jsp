@@ -37,7 +37,8 @@
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="img" name="img" onchange="previewImg(this)"/>
+					<td>
+					<input type="file" id="img" name="img" onchange="previewImg(this)" accept="image/*"/>
 					<img id="preview" src="images/cover/${blog.image }" alt="图片" width="100px" height="100px"/></td>
 				</tr>
 				<tr>

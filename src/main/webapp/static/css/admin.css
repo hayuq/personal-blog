@@ -1,6 +1,6 @@
 @charset "utf-8";
 *{font-size:9pt;border:0;margin:0;padding:0;}
-body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
+body{font-family:'微软雅黑'; margin:0 auto;min-width:980px; user-select:none; -moz-user-select:none; -webkit-user-select:none;}
 ul{display:block;margin:0;padding:0;list-style:none;}
 li{display:block;margin:0;padding:0;list-style: none;}
 img{border:0;}
@@ -10,16 +10,17 @@ a:hover{color:#00a4ac;text-decoration:none;}
 table{border-collapse:collapse;border-spacing: 0;}
 cite{font-style:normal;}
 h2{font-weight:normal;}
+.ellipsis {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; word-break: keep-all;}
 
 /*cloud*/
 #mainBody {width:100%;height:100%;position:absolute;z-index:-1;}
-.cloud {position:absolute;top:0px;left:0px;width:100%;height:100%;background:url(../images/admin/cloud.png) no-repeat;z-index:1;opacity:0.5;}
-#cloud2 {z-index:2;}
+.cloud {position:absolute;top:-30px;left:0px;width:100%;height:100%;background:url(../images/admin/cloud.png) no-repeat;z-index:1;opacity:0.6;}
+#cloud1 {z-index:2; capacity:0.5;}
 
 
 /*login*/
-.loginbg{background-image: url(../images/admin/banner_slide_01.jpg); background-repeat: no-repeat; background-position: center top; overflow: hidden;}
-.logintop{height:47px; position:absolute; top:0; background:url(../images/admin/loginbg1.png) repeat-x;z-index:100; width:100%;}
+.loginbg{background-image: url(../images/admin/banner_slide_02.jpg); background-repeat: no-repeat; background-position: center top; overflow: hidden;}
+.logintop{height:47px; position:absolute; top:0; background:url(../images/admin/loginbg4.png) repeat-x;z-index:100; width:100%;}
 .logintop span{color:#fff; line-height:47px; background:url(../images/admin/loginsj.png) no-repeat 21px 18px; text-indent:44px; color:#afc5d2; float:left;}
 .logintop ul{float:right; padding-right:30px;}
 .logintop ul li{float:left; margin-left:20px; line-height:47px;}
@@ -29,7 +30,7 @@ h2{font-weight:normal;}
 .logintitle{background:none;width:100%; height:71px; margin:0 auto;}
 .systemlogo1{background:url(../images/admin/logo1.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
 .systemlogo2{background:url(../images/admin/logo2.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
-.loginbox{background:rgba(0,0,0,0.52);border-radius:5px;padding-top:20px;color:#f1fafa;}
+.loginbox{background:rgba(0,0,0,0.35);border-radius:5px;padding-top:20px;color:#f1fafa;}
 .loginbox,.loginbox1,.loginbox2,.loginbox3,.loginbox4{width:350px; height:220px;text-align:center;}
 .loginbox .title{font-size:16px;color:#afc5d2;}
 .userwrapper{margin-bottom:20px;margin-top:20px;}
@@ -256,6 +257,9 @@ h2{font-weight:normal;}
 .footer i{display:block; float:right; font-style:normal; margin-right:10px; background:url(../images/admin/fjt.png) no-repeat right; padding-right:12px; }
 
 
+.file{position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5;border-radius: 4px;padding: 4px 12px;overflow: hidden;color: #1E88C7;text-decoration: none;text-indent: 0;line-height: 20px;}
+.file input{position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
+.file:hover{background: #AADFFD;border-color: #78C3F3;color: #004974;text-decoration: none;}
 .table { width: 100%;}
 .table tr td { border: none; padding-top: 10px; padding-bottom: 10px; padding-left: 10px }
 .sctextarea { border-top: 1px solid #a7b5bc; border-left: 1px solid #a7b5bc; border-right: 1px solid #ced9df; border-bottom: 1px solid #ced9df; background-color: white;overflow: hidden;padding-top: 10px;padding-left: 10px;}

@@ -42,7 +42,7 @@
 				<tr>
 					<td style="width:50px">评论内容</td>
 					<td colspan="2">
-						<textarea id="content" rows="8" cols="80" class="sctextarea" disabled="disabled">${comment.content }</textarea>
+						<textarea id="content" rows="8" cols="80" class="sctextarea" readonly>${comment.content }</textarea>
 					</td>
 				</tr>
 				<tr>

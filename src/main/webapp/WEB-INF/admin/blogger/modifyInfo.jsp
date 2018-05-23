@@ -25,8 +25,10 @@
 				</tr>
 				<tr>
 					<td style="width:50px">头像</td>
-					<td><input type="file" id="img" name="img" onchange="previewImg(this)"/>
-					<img id="preview" src="images/avatar/${blogger.imageUrl }" alt="图片" width="100px" height="100px"/></td>
+					<td>
+					   	<input type="file" id="img" name="img" onchange="previewImg(this)" accept="image/*"/>
+						<img id="preview" src="images/avatar/${blogger.imageUrl }" alt="图片" width="100px" height="100px"/>
+					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">签名</td>

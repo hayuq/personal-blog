@@ -34,7 +34,8 @@
 						<tr>
 							<%-- <td><input name="chk" type="checkbox" value="${blogType.typeId }" /></td> --%>
 							<td>${index.count }</td>
-							<td>${blogType.typeName }</td>
+							<td><a class="tablelink" href="blog.shtml?cat=${blogType.typeId }" target="_blank">
+								${blogType.typeName }</a></td>
 							<td>${blogType.orderNo }</td>
 							<td>${blogType.blogCount}</td>
 							<td>
@@ -57,18 +58,21 @@
 			<ul class="paginList"> ${pageCode } </ul>
 		</div>
 	</div>
-<script type="text/javascript">
-	function deleteBlogType(id){
+	<script type="text/javascript">
+	function deleteBlogType(id) {
 		//查询该类别下是否存在文章
-		$.post("blogType/search.do",{"id":id},function(result){
-			if(result.count == 0 && confirm('确定删除该类别吗？')) {
-				window.location.href='blogType/delete.do?id='+id;
-			}
-			else if(result.count > 0 && confirm('该类别下有'+result.count+'篇文章，删除将会把文章移出此分类，是否继续？')){
-				window.location.href='blogType/batch_delete.do?id='+id;
+		$.post("blogType/search.do", {"id":id}, function(result) {
+			if (result.count == 0) {
+				confirm('确定删除该类别吗？', function() {
+				    window.location.href = 'blogType/delete.do?id=' + id;
+				});
+			} else if (result.count > 0) {
+				confirm('该类别下有' + result.count + '篇文章，删除将会把文章移出此分类，是否继续？', function() {
+					window.location.href = 'blogType/batch_delete.do?id=' + id;
+				});
 			}
 		},"json");
 	}
-</script>
+	</script>
 </body>
 </html>

@@ -35,8 +35,10 @@
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" name="img" id="img" onchange="previewImg(this)"/>
-					<img id="preview" width="100px" height="100px"/></td>
+					<td>
+					    <input type="file" id="img" name="img" onchange="previewImg(this)" accept="image/*"/>
+						<img id="preview" width="100px" height="100px"/>
+					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">博客内容<input type="hidden" name="summary" id="summary"/></td>

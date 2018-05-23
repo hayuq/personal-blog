@@ -1,8 +1,7 @@
 /**
- * 创建人：熊俊丞 
- * 创建时间：2016年8月8日 
  * 功能：实现全选及批量删除功能
  */
+
 /** 全选 */
 function selectAll(name, obj) {
 	var chks = document.getElementsByName(name);
@@ -26,7 +25,7 @@ function deleteSelected(name, url) {
 		alert("请至少选择一条记录");
 		return false;
 	}
-	if (confirm("确定删除所选数据吗？")) {
+	confirm("确定删除所选数据吗？", function() {
 		window.location.href = url + "?ids=" + str;
-	}
+	});
 }

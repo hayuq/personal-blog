@@ -112,7 +112,7 @@
 				</li>
 				<li>
 					<div class="header">
-						<cite></cite> <i></i> <a href="/druid/index.html"
+						<cite></cite> <i></i> <a href="druid/index.html"
 							target="rightFrame">性能监控</a>
 					</div>
 				</li>
