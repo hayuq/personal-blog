@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +11,20 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="blogType/list.do">类别管理</a></li>
+			<li><a href="${ctx}/blogType/list.do">类别管理</a></li>
 			<li>添加类别</li>
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blogType/add.do" method="post" enctype="multipart/form-data">
+		<form action="${ctx}/blogType/add.do" onsubmit="return checkBlogType()" method="post">
 			<table class="table">
 				<tr>
 					<td style="width:60px">类别名称</td>
-					<td><input name="typeName" type="text" class="scinput"/></td>
+					<td><input name="typeName" id="typeName" type="text" class="scinput"/></td>
 				</tr>
 				<tr>
-		   			<td style="width:60px">排序</td>
-		   			<td><input name="orderNo" type="text" class="scinput"/></td>
+		   			<td style="width:60px">显示顺序</td>
+		   			<td><input name="orderNo" id="orderNo" type="text" class="scinput"/></td>
 		   		</tr>
 			</table>
 			<input type="submit" class="scbtn" value="保存"/>

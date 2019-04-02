@@ -14,12 +14,12 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="blog/list.do">博客管理</a></li>
+			<li><a href="${ctx}/blog/list.do">博客管理</a></li>
 			<li>修改博客</li>
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="blog/update.do" method="post" onsubmit="return checkBlog()" enctype="multipart/form-data">
+		<form action="${ctx}/blog/update.do" method="post" onsubmit="return checkBlog()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">博客标题<input type="hidden" id="id" name="id" value="${blog.id}"/><input type="hidden" id="msg" value="${msg}"/></td>
@@ -30,21 +30,24 @@
 					<td>
 						<select class="select" id="type" name="typeId">
 							<c:forEach var="blogType" items="${blogTypeList }">
-								<option value="${blogType.typeId }" <c:if test="${blogType.typeId == typeId }">selected="selected"</c:if>>${blogType.typeName }</option>
+								<option value="${blogType.typeId }" <c:if test="${blogType.typeId == typeId }">selected="selected"</c:if>>
+									${blogType.typeName }
+								</option>
 							</c:forEach>
 						</select><input type="hidden" name="releaseDateStr" value='<fmt:formatDate value="${blog.releaseDate }" pattern="yyyy-MM-dd HH:mm"/>'/>
 					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">显示图片</td>
-					<td><input type="file" id="img" name="img" onchange="previewImg(this)"/>
-					<img id="preview" src="images/cover/${blog.image }" alt="图片" width="100px" height="100px"/></td>
+					<td>
+					<input type="file" id="img" name="img" onchange="previewImg(this)" accept="image/*"/>
+					<img id="preview" src="${ctx}/images/cover/${blog.image }" alt="图片" width="100px" height="100px"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">博客内容<input type="hidden" name="summary" id="summary"/></td>
 					<td>
 						<script id="editor" name="content">${blog.content }</script>
-						<script type="text/javascript" src="static/js/ueditor.js"></script>
+						<script type="text/javascript" src="${ctx}/static/js/ueditor.js"></script>
 					</td>
 				</tr>
 				<tr>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.june.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comment_date" property="commentDate" jdbcType="TIMESTAMP" />
+    <result column="is_pass" property="isPass" jdbcType="BIT" />
+    <result column="blog_id" property="blogId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="reply" property="reply" jdbcType="VARCHAR" />
+    <result column="reply_date" property="replyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="Comment" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association property="blog" column="blog_id" select="com.june.dao.BlogMapper.selectByPrimaryKey"/>
+    <association property="user" column="user_id" select="com.june.dao.UserMapper.selectByPrimaryKey"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, comment_date, is_pass, blog_id, user_id, reply, reply_date
+  </sql>
+  
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commentDate != null" >
+        comment_date,
+      </if>
+      <if test="isPass != null" >
+        is_pass,
+      </if>
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="reply != null" >
+        reply,
+      </if>
+       <if test="replyDate != null" >
+        reply_date
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commentDate != null" >
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPass != null" >
+        #{isPass,jdbcType=BIT},
+      </if>
+      <if test="blogId != null" >
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null" >
+        #{reply,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="replyDate != null" >
+       	#{replyDate,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="Comment" >
+    update comment
+    <set >
+      <if test="commentDate != null" >
+        comment_date = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPass != null" >
+        is_pass = #{isPass,jdbcType=BIT},
+      </if>
+      <if test="blogId != null" >
+        blog_id = #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null" >
+        reply = #{reply,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="replyDate != null" >
+        reply_date = #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询条件 -->
+  <sql id="WhereClause">
+  	<where>
+  		<if test="isPass!=null">
+  			AND c.is_pass = #{isPass}
+  		</if>
+  		<if test="blogId!=null and blogId!=''">
+  			AND c.blog_id = #{blogId}
+  		</if>
+  		<if test="firstDate!=null and firstDate!=''">
+  			AND c.comment_date &gt;= #{firstDate}
+  		</if>
+  		<if test="secondDate!=null and secondDate!=''">
+  			AND c.comment_date &lt;= #{secondDate}
+  		</if>
+  		<if test="userName!=null and userName!=''">
+  			AND c.user_id = u.user_id AND u.user_name = #{userName}
+  		</if>
+  	</where>
+  </sql>
+  
+  <!--查询评论列表 -->
+  <select id="getCommentList" parameterType="Map" resultMap="ResultMapWithBLOBs">
+  	SELECT * FROM comment c
+  	<include refid="WhereClause"/>
+  	ORDER BY c.comment_date DESC
+  	<if test="start!=null and size!=null">
+  		LIMIT #{start},#{size}
+  	</if>
+  </select>
+  
+  <!-- 获取评论数 -->
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    SELECT COUNT(*) FROM comment c
+    <include refid="WhereClause"/>
+  </select>
+  
+  <!-- 根据博客id删除评论 -->
+  <delete id="deleteByBlogIds" parameterType="Integer">
+  	DELETE FROM comment 
+  	WHERE blog_id in
+  	<foreach item="blogId" collection="array" open="(" separator="," close=")">
+  	  #{blogId}
+  	</foreach>
+  </delete>
+  
+  <!-- 批量删除 -->
+  <delete id="batchDelete" parameterType="Integer">
+    DELETE from comment
+    WHERE id in
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+        #{id}
+    </foreach>
+  </delete>
+  
+</mapper>

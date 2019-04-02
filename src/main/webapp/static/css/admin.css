@@ -1,36 +1,35 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 *{font-size:9pt;border:0;margin:0;padding:0;}
-body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
+body{font-family:'微软雅黑'; margin:0 auto;min-width:980px; user-select:none; -moz-user-select:none; -webkit-user-select:none;}
 ul{display:block;margin:0;padding:0;list-style:none;}
 li{display:block;margin:0;padding:0;list-style: none;}
 img{border:0;}
 dl,dt,dd,span{margin:0;padding:0;display:block;}
 a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFocus=this.blur());}
-a:hover{color:#00a4ac;text-decoration:none;}
+/*a:hover{color:#00a4ac;text-decoration:none;}*/
+a:link,a:visited,a:hover,a:active{text-decoration:none;underline:none;outline:none;}
+a:hover{color:#00a4ac;}
 table{border-collapse:collapse;border-spacing: 0;}
 cite{font-style:normal;}
 h2{font-weight:normal;}
+.ellipsis {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; word-break: keep-all;}
 
 /*cloud*/
-#mainBody {width:100%;height:100%;position:absolute;z-index:-1;}
-.cloud {position:absolute;top:0px;left:0px;width:100%;height:100%;background:url(../images/admin/cloud.png) no-repeat;z-index:1;opacity:0.5;}
-#cloud2 {z-index:2;}
+#mainbody {width:100%;height:100%;position:absolute;z-index:-1;}
+.cloud {position:absolute;top:-30px;left:0px;width:100%;height:100%;background:url(../images/admin/cloud.png) no-repeat;z-index:1;opacity:0.6;}
+#cloud1 {z-index:2; capacity:0.5;}
 
 
 /*login*/
-.loginbg{background-image: url(../images/admin/banner_slide_01.jpg); background-repeat: no-repeat; background-position: center top; overflow: hidden;}
-.logintop{height:47px; position:absolute; top:0; background:url(../images/admin/loginbg1.png) repeat-x;z-index:100; width:100%;}
-.logintop span{color:#fff; line-height:47px; background:url(../images/admin/loginsj.png) no-repeat 21px 18px; text-indent:44px; color:#afc5d2; float:left;}
+.loginbg{background: url(../images/admin/banner_slide_02.jpg) no-repeat; overflow: hidden;}
+.logintop{height:47px; position:absolute; top:0; background:url(../images/admin/loginbg4.png) repeat-x;z-index:100; width:100%;}
+.logintop span{color:#fff; line-height:47px; background:url(../images/admin/loginsj.png) no-repeat 25px 16px; text-indent:44px; color:#afc5d2; float:left;}
 .logintop ul{float:right; padding-right:30px;}
 .logintop ul li{float:left; margin-left:20px; line-height:47px;}
 .logintop ul li a{color:#afc5d2;}
 .logintop ul li a:hover{color:#fff;}
-.loginbody{width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
-.logintitle{background:none;width:100%; height:71px; margin:0 auto;}
-.systemlogo1{background:url(../images/admin/logo1.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
-.systemlogo2{background:url(../images/admin/logo2.png) no-repeat center;width:100%; height:71px; margin-top:0px;}
-.loginbox{background:rgba(0,0,0,0.52);border-radius:5px;padding-top:20px;color:#f1fafa;}
-.loginbox,.loginbox1,.loginbox2,.loginbox3,.loginbox4{width:350px; height:220px;text-align:center;}
+.loginbody{ display: flex; justify-content: center;}
+.loginbox{width:350px; height:230px;position: absolute; top: 50%; left: 50%; margin-left: -175px;margin-top: -115px; background:rgba(0,0,0,0.35);border-radius:5px;padding-top:20px;color:#f1fafa;text-align:center;}
 .loginbox .title{font-size:16px;color:#afc5d2;}
 .userwrapper{margin-bottom:20px;margin-top:20px;}
 .pwdwrapper{margin-bottom:20px;}
@@ -39,20 +38,6 @@ h2{font-weight:normal;}
 .loginpwd{width:220px; height:35px; background:none; border:1px solid #ccc;border-radius:4px;line-height:35px; padding-left:10px; font-size:14px;color:#bbb }
 .loginbtn{width:80px;height:30px; background:#3B95C8; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; padding:5px;border-radius:3px}
 .resetbtn{margin-left:70px;width:80px;height:30px; background:#F90; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; padding:5px;border-radius:3px}
-.yzm{width:341px; height:46px; background:url(../images/admin/yzmbg.png) no-repeat; padding-bottom:5px;}
-.yzm span{display:block; float:left;width:227px; height:46px;}
-.yzm span input{background:none; border:none; width:183px; height:46px; line-height:46px;padding-left:44px;font-size:14px; color:#cee4f1;}
-.yzm cite{float:right; width:114px; height:46px; line-height:46px; font-size:18px; color:#fff; text-align:center;}
-
-.loginbody1{background:url(../images/admin/loginbg4.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
-.systemlogo, .systemlogo1, .systemlogo2{width:100%; height:71px; margin-top:50px; text-align:center;}
-.loginlist{width:810px; overflow:hidden;}
-.loginlist{margin-top:50px;}
-.loginlist li{float:left; margin-left:150px; margin-right:3px;}
-.loginlist li a{ display:block;width:196px; height:252px; background:url(../images/admin/lbg.png) no-repeat; text-align:center; padding-top:25px; cursor:pointer;}
-.loginlist li a:hover{background:url(../images/admin/lbg1.png) no-repeat;}
-.loginlist li a p{font-size:16px; color:#fff; padding-top:10px;}
-
 
 /*top*/
 .header{height:30px;}
@@ -256,6 +241,9 @@ h2{font-weight:normal;}
 .footer i{display:block; float:right; font-style:normal; margin-right:10px; background:url(../images/admin/fjt.png) no-repeat right; padding-right:12px; }
 
 
+.file{position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5;border-radius: 4px;padding: 4px 12px;overflow: hidden;color: #1E88C7;text-decoration: none;text-indent: 0;line-height: 20px;}
+.file input{position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
+.file:hover{background: #AADFFD;border-color: #78C3F3;color: #004974;text-decoration: none;}
 .table { width: 100%;}
 .table tr td { border: none; padding-top: 10px; padding-bottom: 10px; padding-left: 10px }
 .sctextarea { border-top: 1px solid #a7b5bc; border-left: 1px solid #a7b5bc; border-right: 1px solid #ced9df; border-bottom: 1px solid #ced9df; background-color: white;overflow: hidden;padding-top: 10px;padding-left: 10px;}

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>博客列表</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
 </head>
 <body>
@@ -11,14 +11,14 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="blog/list.do">博客管理</a></li>
+			<li><a href="${ctx}/blog/list.do">博客管理</a></li>
 			<li>博客列表</li>
 		</ul>
 	</div>
 
 	<div class="rightinfo">
 		<div class="tools">
-			<form action="blog/list.do" method="post">
+			<form action="${ctx}/blog/list.do" method="post">
 				<ul class="seachform">
 					<li><label>标题</label><input name="title" type="text" class="scinput" value="${entry.title }"/></li>
 					<li><label>发布时间</label><input name="firstDate" type="text" class="scinput" value="${entry.firstDate }" onfocus="WdatePicker()"/></li>
@@ -32,7 +32,7 @@
 								</c:forEach>
 							</select>
 						</div></li>
-					<li><input name="" type="submit" class="scbtn" value="查询" /></li>
+					<li><input type="submit" class="scbtn" value="查询" /></li>
 				</ul>
 			</form>
 		</div>
@@ -40,7 +40,7 @@
 			<thead>
 				<tr>
 					<th><input type="checkbox" onclick="selectAll('chk',this)" /></th>
-					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
+					<th>序号</th>
 					<th>标题</th>
 					<th>所属类别</th>
 					<th>显示图片</th>
@@ -54,13 +54,17 @@
 						<tr>
 							<td><input name="chk" type="checkbox" value="${blog.id }" /></td>
 							<td>${index.count }</td>
-							<td><a target="_blank" class="tablelink" href="blog/articles/${blog.id }.shtml">${blog.title }</a></td>
-							<td><a target="_blank" class="tablelink" href="blog.shtml?type=${blog.blogType.typeName }">${blog.blogType.typeName }</a></td>
-							<td><img src="images/cover/${blog.image}" alt="图片" width="45" height="40" style="vertical-align: middle;margin:5px;"></td>
+							<td><a target="_blank" class="tablelink" href="${ctx}/blog/articles/${blog.id }.shtml">${blog.title }</a></td>
+							<td><a target="_blank" class="tablelink" href="${ctx}/blog.shtml?cat=${blog.blogType.typeId }">${blog.blogType.typeName }</a></td>
+							<td><img src="${ctx }/images/cover/${blog.image}" alt="图片" width="45" height="40" style="vertical-align: middle;margin:5px;"></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${blog.releaseDate }" /></td>
 							<td class="op">
-								<a href="blog/toUpdate.do?id=${blog.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
-								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='blog/delete.do?id=${blog.id }'"> <img src="static/images/admin/t03.png" />删除</a>
+								<a href="${ctx}/blog/toUpdate.do?id=${blog.id }" target="_self" class="tablelink">
+								    <img class="detail" src="${ctx}/static/images/admin/ico06.png" />修改
+								</a> 
+								<a href="javascript:void(0)" class="tablelink" onclick="deleteOne('${ctx}/blog/delete.do', ${blog.id })"> 
+								    <img src="${ctx}/static/images/admin/t03.png" />删除
+								</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -70,7 +74,7 @@
 		
 		<div class="pagin">
 			<div class="message">
-				 <input name="" type="button" class="scbtn" value="删除所选" onclick="deleteSelected('chk','blog/deletes.do')" />
+				 <input type="button" class="scbtn" value="删除所选" onclick="deleteSelected('chk','${ctx}/blog/deletes.do')" />
 				共<i class="blue">&nbsp;${pagination.totalCount }&nbsp;</i>条记录，每页&nbsp;<i
 					class="blue">${pagination.pageSize }</i>&nbsp;条，当前显示第&nbsp;<i
 					class="blue">${pagination.currentPage }&nbsp;/&nbsp;${pagination.totalPage }&nbsp;</i>页

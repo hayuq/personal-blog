@@ -9,7 +9,7 @@
 	bottom: auto !important;
 	float: none !important;
 	left: auto !important;
-	line-height: 1.1em !important;
+	line-height: 1.3em !important;
 	margin: 0 !important;
 	outline: 0 !important;
 	overflow: visible !important;
@@ -18,7 +18,7 @@
 	right: auto !important;
 	text-align: left !important;
 	top: auto !important;
-	vertical-align: baseline !important;
+	/*vertical-align: baseline !important;*/
 	width: auto !important;
 	box-sizing: content-box !important;
 	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;

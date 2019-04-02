@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
+    isELIgnored="false" trimDirectiveWhitespaces="true"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="${ctx }/favicon.ico" rel="SHORTCUT ICON">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>出错了</title>
+</head>
+<body>
+    <p>错误代码：${error.code }</p>
+    <p>错误信息：${error.msg }</p>
+    <p>请将此错误信息报告给我们，我们将尽快处理。对于给您造成的不便，我们深表歉意。</p>
+</body>
+</html>

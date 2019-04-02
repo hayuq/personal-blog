@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="rightinfo">
-		<form action="blogger/modifyInfo.do" method="post" onsubmit="return checkInfo()" enctype="multipart/form-data">
+		<form action="${ctx}/blogger/modifyInfo.do" method="post" onsubmit="return checkInfo()" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<td style="width:50px">昵称<input type="hidden" id="id" name="id" value="${blogger.id}"/><input type="hidden" id="msg" value="${msg}"/></td>
@@ -25,8 +25,10 @@
 				</tr>
 				<tr>
 					<td style="width:50px">头像</td>
-					<td><input type="file" id="img" name="img" onchange="previewImg(this)"/>
-					<img id="preview" src="images/avatar/${blogger.imageUrl }" alt="图片" width="100px" height="100px"/></td>
+					<td>
+					   	<input type="file" id="img" name="img" onchange="previewImg(this)" accept="image/*"/>
+						<img id="preview" src="${ctx}/images/avatar/${blogger.imageUrl }" alt="图片" width="100px" height="100px"/>
+					</td>
 				</tr>
 				<tr>
 					<td style="width:50px">签名</td>
@@ -38,7 +40,7 @@
 					<td style="width:50px">个人简介</td>
 					<td>
 						<textarea id="editor" name="profile" id="profile">${blogger.profile }</textarea>
-						<script type="text/javascript" src="static/js/ueditor.js"></script>
+						<script type="text/javascript" src="${ctx}/static/js/ueditor.js"></script>
 					</td>
 				</tr>
 			</table>

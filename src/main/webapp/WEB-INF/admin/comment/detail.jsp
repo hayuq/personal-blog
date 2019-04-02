@@ -11,7 +11,7 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="comment/list.do">评论管理</a></li>
+			<li><a href="${ctx}/comment/list.do">评论管理</a></li>
 			<li>评论详情</li>
 		</ul>
 	</div>
@@ -42,7 +42,7 @@
 				<tr>
 					<td style="width:50px">评论内容</td>
 					<td colspan="2">
-						<textarea id="content" rows="8" cols="80" class="sctextarea" disabled="disabled">${comment.content }</textarea>
+						<textarea id="content" rows="8" cols="80" class="sctextarea" readonly>${comment.content }</textarea>
 					</td>
 				</tr>
 				<tr>

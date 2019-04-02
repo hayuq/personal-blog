@@ -5,16 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>链接管理</title>
 <%@include file="/WEB-INF/admin/head.jsp" %>
-<style>
-	.scbtn{}
-</style>
 </head>
 <body onload="showMsg()">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="link/list.do">链接管理</a></li>
+			<li><a href="${ctx}/link/list.do">链接管理</a></li>
 			<li>链接列表</li>
 		</ul>
 	</div>
@@ -23,8 +20,9 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input type="checkbox" onclick="selectAll('chk',this)" /><input type="hidden" id="msg"  value="${msg }"/></th>
-					<th>序号<i class="sort"><img src="static/images/admin/px.gif" /></i></th>
+					<th><input type="checkbox" onclick="selectAll('chk',this)" />
+					<input type="hidden" id="msg"  value="${msg }"/></th>
+					<th>序号</th>
 					<th>链接名称</th>
 					<th>链接地址</th>
 					<th>显示顺序</th>
@@ -37,12 +35,16 @@
 						<tr>
 							<td><input name="chk" type="checkbox" value="${link.id }" /></td>
 							<td>${index.count }</td>
-							<td><a target="_blank" class="tablelink" href="http://${link.linkUrl }">${link.linkName }</a></td>
+							<td><a target="_blank" class="tablelink" href="${link.linkUrl }">${link.linkName }</a></td>
 							<td>${link.linkUrl }</td>
 							<td>${link.orderNo }</td>
 							<td>
-								<a href="link/toUpdate.do?id=${link.id }" target="_self" class="tablelink"><img class="detail" src="static/images/admin/ico06.png" />修改</a> 
-								<a href="javascript:void(0)" class="tablelink" onclick="if(confirm('确定删除该条数据吗？')) window.location.href='link/delete.do?id=${link.id }'"> <img src="static/images/admin/t03.png" />删除</a>
+								<a href="${ctx}/link/toUpdate.do?id=${link.id }" target="_self" class="tablelink">
+								    <img class="detail" src="${ctx}/static/images/admin/ico06.png" />修改
+								</a> 
+								<a href="javascript:void(0)" class="tablelink" onclick="deleteOne('${ctx}/link/delete.do', ${link.id })"> 
+								    <img src="${ctx}/static/images/admin/t03.png" />删除
+								</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -50,7 +52,7 @@
 			</tbody>
 		</table>
 		
-		<input name="" type="button" class="scbtn" value="删除所选" onclick="deleteSelected('chk','link/deletes.do')" />
+		<input name="" type="button" class="scbtn" value="删除所选" onclick="deleteSelected('chk','${ctx}/link/deletes.do')" />
 		<%-- <div class="pagin">
 			<div class="message">
 				共<i class="blue">&nbsp;${pagination.totalCount }&nbsp;</i>条记录，每页&nbsp;<i

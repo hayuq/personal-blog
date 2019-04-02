@@ -1,79 +1,68 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xjc</groupId>
-	<artifactId>Blog</artifactId>
+	<groupId>com.june</groupId>
+	<artifactId>personal-blog</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Blog Maven Webapp</name>
+	<version>1.0</version>
+	<name>personal-blog Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<java-version>1.8</java-version>
 		<junit-version>4.12</junit-version>
 		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
 		<jackson-mapper-asl-version>1.9.12</jackson-mapper-asl-version>
 		<jackson-core-asl-version>1.9.12</jackson-core-asl-version>
-		<mysql-connector-java-version>5.1.8</mysql-connector-java-version>
-		<org.mybatis-version>3.2.7</org.mybatis-version>
-		<org.mybatis-spring-version>1.2.2</org.mybatis-spring-version>
+		<mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+		<org.mybatis-version>3.4.1</org.mybatis-version>
+		<org.mybatis-spring-version>1.3.0</org.mybatis-spring-version>
 		<opensymphony-version>2.4.2</opensymphony-version>
-		<freemarker-version>2.3.9</freemarker-version>
-		<c3p0-version>0.9.1.2</c3p0-version>
-		<commons-collections-version>1.0</commons-collections-version>
+		<commons-io-version>2.4</commons-io-version>
 		<commons-fileupload-version>1.3.1</commons-fileupload-version>
-		<org.apache.commons-version>3.1</org.apache.commons-version>
-		<commons-codec-version>1.6</commons-codec-version>
+		<commons-codec-version>1.9</commons-codec-version>
 		<dom4j-version>1.6.1</dom4j-version>
+		<json-version>20140107</json-version>
 		<javax.servlet-version>1.2</javax.servlet-version>
 		<aspectjweaver-version>1.6.6</aspectjweaver-version>
 		<slf4j-log4j12-version>1.6.6</slf4j-log4j12-version>
 		<log4j-version>1.2.16</log4j-version>
 		<javax.servlet-jsp-version>2.0</javax.servlet-jsp-version>
-		<cglib-version>2.2.2</cglib-version>
 		<slf4j-api-version>1.6.6</slf4j-api-version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<lucene-version>5.3.1</lucene-version>
+		<lombok-version>1.16.16</lombok-version>
+		<jackson-version>2.8.4</jackson-version>
+		<fastjson-version>1.2.30</fastjson-version>
 	</properties>
+
 	<dependencies>
 		<!-- with junit4.8.2 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
-			<type>jar</type>
+			<scope>test</scope>
 		</dependency>
+		
+		<!-- alibaba fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson-version}</version>
+        </dependency>
+		
 		<!-- with spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -84,82 +73,81 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument-tomcat</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
 		<!-- with mybatis-spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>${org.mybatis-version}</version>
 		</dependency>
+		<!-- 让mybatis支持Java 8 中的新的日期时间类LocalDate、LocalDateTime、LocalTime -->
+        <dependency>  
+            <groupId>org.mybatis</groupId>  
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>  
+            <version>1.0.1</version>  
+        </dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${org.mybatis-spring-version}</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.mybatis.generator</groupId>
+		    <artifactId>mybatis-generator-core</artifactId>
+		    <version>1.3.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatis-plus</artifactId>
+		    <version>2.3</version>
+		</dependency>
+				
+				
+		
 		<!-- jdbc driver -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java-version}</version>
 		</dependency>
-		<!-- connect pool with c3p0 -->
-		<!-- <dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>${c3p0-version}</version>
-		</dependency> -->
 		
-		<!-- 添加连接池druid支持 -->
+		<!-- baidu ueditor -->
+		<dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>ueditor</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+		<!-- alibaba druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
 		</dependency>
-	
+
 		<!-- apache commons jar -->
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>${commons-collections-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>${commons-fileupload-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${org.apache.commons-version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>${commons-codec-version}</version>
 		</dependency>
-		<!-- analyze xml use dom4j -->
 		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>${dom4j-version}</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+
 		<!-- about servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -178,63 +166,115 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 日志依赖 -->
+		
+		<!-- log slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.6</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.6</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20131018</version>
+			<version>${json-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>oscache</groupId>
-			<artifactId>oscache</artifactId>
-			<version>2.4.1</version>
-		</dependency>
 		<!-- lucene -->
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-core</artifactId>
-		    <version>5.3.1</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-smartcn</artifactId>
+			<version>${lucene-version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-analyzers-common</artifactId>
-		    <version>5.3.1</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>${lucene-version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-analyzers-smartcn</artifactId>
-		    <version>5.3.1</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>${lucene-version}</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-highlighter</artifactId>
-		    <version>5.3.1</version>
+        
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        
+        <!-- redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.7.5.RELEASE</version>
+        </dependency>
+        
+        <!-- Spring Session -->
+        <dependency>
+		    <groupId>org.springframework.session</groupId>
+		    <artifactId>spring-session</artifactId>
+		    <version>1.3.1.RELEASE</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-queryparser</artifactId>
-		    <version>5.3.1</version>
-		</dependency>
+
+        
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+					<encoding>UTF-8</encoding>
+					<annotationProcessorPaths>
+			          <path>
+			            <groupId>org.projectlombok</groupId>
+			            <artifactId>lombok</artifactId>
+			            <version>${lombok-version}</version>
+			          </path>
+			        </annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8082</port>
+					<server>tomcat7</server>
+					<path>/personal-blog</path>
+					<charset>UTF-8</charset>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<defaultGoal>compile</defaultGoal>
+	</build>
 </project>

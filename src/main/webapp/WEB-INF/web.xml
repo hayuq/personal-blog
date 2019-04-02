@@ -7,9 +7,19 @@
 	<!-- Spring 容器 -->
 	 <context-param>  
         <param-name>contextConfigLocation</param-name>  
-        <param-value>classpath:applicationContext.xml</param-value>  
+        <param-value>classpath:spring/spring-*.xml</param-value>  
     </context-param> 
-
+	
+	<!-- Spring Session Filter -->
+	<filter>
+	   <filter-name>springSessionRepositoryFilter</filter-name>
+	   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	   <filter-name>springSessionRepositoryFilter</filter-name>
+	   <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- 编码过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -19,14 +29,10 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
-
-	<!-- Spring监听器 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>com.xjc.listener.MyListener</listener-class>
-	</listener>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<!-- Spring MVC -->
 	<servlet>
@@ -34,7 +40,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springmvc-front.xml</param-value>
+			<param-value>classpath:spring/springmvc-front.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -43,7 +49,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springmvc-admin.xml</param-value>
+			<param-value>classpath:spring/springmvc-admin.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -73,20 +79,42 @@
     <servlet>
         <servlet-name>DruidStatView</servlet-name>
         <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <init-param>
+            <!-- 用户名 -->
+            <param-name>loginUsername</param-name>
+            <param-value>druid</param-value>
+        </init-param>
+        <init-param>
+            <!-- 密码 -->
+            <param-name>loginPassword</param-name>
+            <param-value>123</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>DruidStatView</servlet-name>
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
-    <!-- 连接池 启用Web监控统计功能   end-->
+    <!-- 连接池启用Web监控统计功能 end-->
+
+    <!-- <welcome-file-list>
+    	<welcome-file>index.shtml</welcome-file>
+    </welcome-file-list> -->
     
     <error-page>
     	<error-code>404</error-code>
-    	<location>/errorPages/404.html</location>
+    	<location>/WEB-INF/error/404.jsp</location>
     </error-page>
     <error-page>
     	<error-code>500</error-code>
-    	<location>/errorPages/500.html</location>
+    	<location>/WEB-INF/error/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/error/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/error/500.jsp</location>
     </error-page>
     
 </web-app>

@@ -11,24 +11,24 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="link/list.do">链接管理</a></li>
+			<li><a href="${ctx}/link/list.do">链接管理</a></li>
 			<li>修改链接</li>
 		</ul>
 	</div>
 	<div class="rightinfo">
-		<form action="link/update.do" method="post" enctype="multipart/form-data">
+		<form action="${ctx}/link/update.do" method="post" onsubmit="return checkLinkData()">
 			<table class="table">
 				<tr>
-					<td style="width:60px">链接名称<input type="hidden" name="id" value="${link.id }"/></td>
-					<td><input name="linkName" type="text" class="scinput" style="width:200px" value="${link.linkName }"/></td>
+					<td style="width:60px">链接名称<input type="hidden" name="id" id="id" value="${link.id }"/></td>
+					<td><input name="linkName" id="linkName" type="text" class="scinput" style="width:200px" value="${link.linkName }"/></td>
 				</tr>
 				<tr>
 					<td style="width:60px">链接地址</td>
-					<td><input name="linkUrl" type="text" class="scinput" style="width:200px" value="${link.linkUrl }"/> 默认以http://开头</td>
+					<td><input name="linkUrl" id="linkUrl" type="text" class="scinput" style="width:200px" value="${link.linkUrl }"/> 请以http://或https://开头</td>
 				</tr>
 				<tr>
 		   			<td style="width:60px">显示顺序</td>
-		   			<td><input name="orderNo" type="text" class="scinput" value="${link.orderNo }"/></td>
+		   			<td><input name="orderNo" id="orderNo" type="text" class="scinput" value="${link.orderNo }"/></td>
 		   		</tr>
 			</table>
 			<input type="submit" class="scbtn" value="保存"/>

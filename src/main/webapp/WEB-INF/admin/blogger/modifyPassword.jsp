@@ -19,21 +19,19 @@
 	<div class="rightinfo">
 			<table class="table">
 				<tr>
-					<td style="width:50px">原密码<input type="hidden" name="id" id="id" value="${currentUser.id }"/></td>
-					<td>
-						<input type="text" name="oldpwd" id="oldpwd" class="scinput" required="required"/>
-					</td>
+					<td style="width:50px">账号</td>
+					<td><input type="text" id="userName" value="${currentUser.userName }" class="scinput" readonly/></td>
+				</tr>
+				<tr>
+					<td style="width:50px">原密码</td>
+					<td><input type="text" id="oldpwd" class="scinput"/></td>
 				</tr>
 				<tr>
 					<td style="width:50px">新密码</td>
-					<td><input type="text" name="newpwd" id="newpwd" class="scinput" required="required"/></td>
-				</tr>
-				<tr>
-					<td style="width:60px">确认新密码</td>
-					<td><input type="text" name="repwd" id="repwd" class="scinput" required="required"/></td>
+					<td><input type="text" id="newpwd" class="scinput"/></td>
 				</tr>
 			</table>
-			<input type="button" class="scbtn" value="保存" onclick="savePwd()"/>
+			<input type="button" class="scbtn" value="保存" onclick="savePassword()"/>
 			<input type="button" class="scbtn" value="返回" onclick="history.back()"/>
 			<span id="errorInfo" style="font-size:16px"></span>
 		</form>
