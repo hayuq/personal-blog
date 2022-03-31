@@ -11,7 +11,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<junit-version>4.13.1</junit-version>
-		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.18</org.springframework-version>
 		<jackson-mapper-asl-version>1.9.12</jackson-mapper-asl-version>
 		<jackson-core-asl-version>1.9.12</jackson-core-asl-version>
 		<mysql-connector-java-version>8.0.16</mysql-connector-java-version>
